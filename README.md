@@ -40,4 +40,5 @@ coding!
    ...
 - Niamh Brown: [GitHub](https://github.com/NiamhBrown) / [LinkedIn](https://www.linkedin.com/in/niamh-brown1/)
 - Yusuf Mohsen: [GitHub](https://github.com/yusufmohsiin) / [LinkedIn](https://www.linkedin.com/in/yusuf-mohsiin/)
+- Denys Melnyk: [GitHub](https://github.com/TheDrakl) / [LinkedIn](https://www.linkedin.com/in/denys-melnyk7/)
 
