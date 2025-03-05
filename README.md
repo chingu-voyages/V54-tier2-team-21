@@ -40,4 +40,5 @@ coding!
 - Yusuf Mohsen: [GitHub](https://github.com/yusufmohsiin) / [LinkedIn](https://www.linkedin.com/in/yusuf-mohsiin/)
 - Denys Melnyk: [GitHub](https://github.com/TheDrakl) / [LinkedIn](https://www.linkedin.com/in/denys-melnyk7/)
 - Estelle Couture: [GitHub](https://github.com/Escargotte) / [LinkedIn](https://www.linkedin.com/in/estelle-couture-41422b47/)
+- Adil Rahman: [GitHub](https://github.com/adil-rahman1) / [LinkedIn](https://www.linkedin.com/in/adil-rahman1/)
 
