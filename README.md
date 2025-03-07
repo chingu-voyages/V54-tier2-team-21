@@ -41,4 +41,4 @@ coding!
 - Denys Melnyk: [GitHub](https://github.com/TheDrakl) / [LinkedIn](https://www.linkedin.com/in/denys-melnyk7/)
 - Estelle Couture: [GitHub](https://github.com/Escargotte) / [LinkedIn](https://www.linkedin.com/in/estelle-couture-41422b47/)
 - Adil Rahman: [GitHub](https://github.com/adil-rahman1) / [LinkedIn](https://www.linkedin.com/in/adil-rahman1/)
-
+Tibam Gisele [GitHub [https://github.com/Gisele-1] LinkedIn [https://www.linkedin.com/in/tibam-gisele-684781129]
