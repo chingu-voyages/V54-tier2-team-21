@@ -1,11 +1,10 @@
 import { Button, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Inputs } from '../types';
+import { Inputs, FormComponentProps } from '../types';
 
-const Form = ({ onFormSubmit }) => {
+const Form = ({ onFormSubmit }: FormComponentProps) => {
     const { register, handleSubmit } = useForm<Inputs>();
-    //   watch,
-    //   formState: { errors },
+
     const onSubmit: SubmitHandler<Inputs> = (data) => onFormSubmit(data);
 
     return (
