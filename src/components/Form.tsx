@@ -16,6 +16,8 @@ const Form = ({ onFormSubmit }) => {
                 variant="outlined"
                 {...register('persona')}
                 sx={{ m: 2 }}
+                multiline
+                rows={5}
             />
             <TextField
                 id="context"
@@ -23,6 +25,8 @@ const Form = ({ onFormSubmit }) => {
                 variant="outlined"
                 {...register('context')}
                 sx={{ m: 2 }}
+                multiline
+                rows={5}
             />
             <TextField
                 id="task"
@@ -30,6 +34,8 @@ const Form = ({ onFormSubmit }) => {
                 variant="outlined"
                 {...register('task')}
                 sx={{ m: 2 }}
+                multiline
+                rows={5}
             />
             <TextField
                 id="output"
@@ -37,6 +43,8 @@ const Form = ({ onFormSubmit }) => {
                 variant="outlined"
                 {...register('output')}
                 sx={{ m: 2 }}
+                multiline
+                rows={5}
             />
             <TextField
                 id="constraint"
@@ -44,6 +52,8 @@ const Form = ({ onFormSubmit }) => {
                 variant="outlined"
                 {...register('constraint')}
                 sx={{ m: 2 }}
+                multiline
+                rows={5}
             />
             <Button variant="contained" type="submit" sx={{ m: 2 }}>
                 Generate
