@@ -23,8 +23,10 @@ function App() {
     return (
         <>
             {/* <Header /> */}
-            <Form onFormSubmit={onFormSubmit} />
-            <Prompt formData={formData} />
+            <div className="prompt-container">
+                <Form onFormSubmit={onFormSubmit} />
+                <Prompt formData={formData} />
+            </div>
             {/* <Footer /> */}
         </>
     );
