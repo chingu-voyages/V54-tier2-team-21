@@ -3,17 +3,20 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 
+const teamMembers: Array<string> = [
+    'Adil Rahman',
+    'Tibam Gisele',
+    'Andreea Tohatan',
+    "Mark O'Brien",
+    'Denys Melnyk',
+    'Niamh Brown',
+    'Estelle Couture',
+    'Yusuf Mohsen',
+];
+
 const Footer = () => {
     return (
         <Container component="footer">
-            {/* <Typography
-                component="p"
-                sx={{
-                    textAlign: 'left',
-                }}
-            >
-                
-            </Typography> */}
             <Container
                 id="team-container"
                 maxWidth="xs"
@@ -32,30 +35,13 @@ const Footer = () => {
                     <Grid size={12}>
                         <Typography>Team members</Typography>
                     </Grid>
-                    <Grid size={6}>
-                        <Typography>Adil Rahman</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Tibam Gisele</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Andreea Tohatan</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Mark O'Brien</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Denys Melnyk</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Niamh Brown</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Estelle Couture</Typography>
-                    </Grid>
-                    <Grid size={6}>
-                        <Typography>Yusuf Mohsen</Typography>
-                    </Grid>
+                    {teamMembers.map((member) => {
+                        return (
+                            <Grid size={6}>
+                                <Typography>{member}</Typography>
+                            </Grid>
+                        );
+                    })}
                 </Grid>
             </Container>
             <Typography component="p">
