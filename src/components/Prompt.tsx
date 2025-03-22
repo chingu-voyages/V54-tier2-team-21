@@ -1,14 +1,11 @@
-import { Inputs } from '../types'
+import { Inputs } from '../types';
 
 interface PromptProps {
-  formData: Inputs
+    formData: Inputs;
 }
 
-const Prompt = ({formData}: PromptProps) => {
-
-    return (
-      <p>{Object.values(formData).join(" ")}</p>
-    )
+const Prompt = ({ formData }: PromptProps) => {
+    return <p>{Object.values(formData).join(' ')}</p>;
 };
 
 export default Prompt;

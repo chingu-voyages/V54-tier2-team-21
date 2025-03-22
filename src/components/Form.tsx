@@ -1,7 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs, FormComponentProps } from '../types';
-// import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from '@mui/icons-material/Clear';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const Form = ({ onFormSubmit }: FormComponentProps) => {
     const {
@@ -10,7 +11,16 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
         formState: { errors },
     } = useForm<Inputs>();
 
+const Form = ({ onFormSubmit }: FormComponentProps) => {
+    const { register, handleSubmit, setValue } = useForm<Inputs>();
+
     const onSubmit: SubmitHandler<Inputs> = (data) => onFormSubmit(data);
+
+    const clearField = (
+        field: 'persona' | 'context' | 'task' | 'output' | 'constraint'
+    ) => {
+        setValue(field, '');
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,10 +31,22 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 {...register('persona', {
                     required: true,
                 })}
+                error={!!errors.persona}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
-                error={!!errors.persona}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <ClearIcon
+                                    onClick={() => clearField('persona')}
+                                    className="clear-icon"
+                                />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
             <TextField
                 id="context"
@@ -33,10 +55,21 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 {...register('context', {
                     required: true,
                 })}
+                error={!!errors.context}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
-                error={!!errors.context}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <ClearIcon
+                                    onClick={() => clearField('context')}
+                                />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
             <TextField
                 id="task"
@@ -45,10 +78,19 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 {...register('task', {
                     required: true,
                 })}
+                error={!!errors.task}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
-                error={!!errors.task}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <ClearIcon onClick={() => clearField('task')} />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
             <TextField
                 id="output"
@@ -57,10 +99,21 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 {...register('output', {
                     required: true,
                 })}
+                error={!!errors.output}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
-                error={!!errors.output}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <ClearIcon
+                                    onClick={() => clearField('output')}
+                                />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
             <TextField
                 id="constraint"
@@ -69,10 +122,21 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 {...register('constraint', {
                     required: true,
                 })}
+                error={!!errors.constraint}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
-                error={!!errors.constraint}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <ClearIcon
+                                    onClick={() => clearField('constraint')}
+                                />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
             <Button variant="contained" type="submit" sx={{ m: 2 }}>
                 Generate
