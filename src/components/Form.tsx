@@ -8,11 +8,9 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm<Inputs>();
-
-const Form = ({ onFormSubmit }: FormComponentProps) => {
-    const { register, handleSubmit, setValue } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => onFormSubmit(data);
 
