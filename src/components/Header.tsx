@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 const Header = () => {
     return (
         <Container component="header">
-            <Typography variant="h1">5 STAR API</Typography>
+            <Typography variant="h1">5 STAR AI</Typography>
         </Container>
     );
 };
