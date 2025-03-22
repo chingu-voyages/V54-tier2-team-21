@@ -5,6 +5,13 @@ import ClearIcon from '@mui/icons-material/Clear';
 import InputAdornment from '@mui/material/InputAdornment';
 
 const Form = ({ onFormSubmit }: FormComponentProps) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
+
+const Form = ({ onFormSubmit }: FormComponentProps) => {
     const { register, handleSubmit, setValue } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => onFormSubmit(data);
@@ -21,7 +28,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 id="persona"
                 label="Persona"
                 variant="outlined"
-                {...register('persona')}
+                {...register('persona', {
+                    required: true,
+                })}
+                error={!!errors.persona}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
@@ -42,7 +52,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 id="context"
                 label="Context"
                 variant="outlined"
-                {...register('context')}
+                {...register('context', {
+                    required: true,
+                })}
+                error={!!errors.context}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
@@ -62,7 +75,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 id="task"
                 label="Task"
                 variant="outlined"
-                {...register('task')}
+                {...register('task', {
+                    required: true,
+                })}
+                error={!!errors.task}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
@@ -80,7 +96,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 id="output"
                 label="Output"
                 variant="outlined"
-                {...register('output')}
+                {...register('output', {
+                    required: true,
+                })}
+                error={!!errors.output}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
@@ -100,7 +119,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 id="constraint"
                 label="Constraint"
                 variant="outlined"
-                {...register('constraint')}
+                {...register('constraint', {
+                    required: true,
+                })}
+                error={!!errors.constraint}
                 sx={{ m: 2 }}
                 multiline
                 rows={5}
