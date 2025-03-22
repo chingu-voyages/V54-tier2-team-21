@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './App.css';
-// import Header from './components/Header'
+import Header from './components/Header';
 import Form from './components/Form';
 import Prompt from './components/Prompt';
-// import Footer from './components/Footer'
+import Footer from './components/Footer';
 import { Inputs } from './types';
 import Result from './components/Result';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import Container from '@mui/material/Container';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -27,13 +28,13 @@ function App() {
 
     return (
         <>
-            {/* <Header /> */}
-            <div className="prompt-container">
+            <Header />
+            <Container className="prompt-container">
                 <Form onFormSubmit={onFormSubmit} />
                 <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
                 <Result result={result} />
-            </div>
-            {/* <Footer /> */}
+            </Container>
+            <Footer />
         </>
     );
 }

@@ -4,9 +4,9 @@ form {
     flex-direction: column;
 }
 
-.prompt-container {
+.prompt-container,
+footer {
     max-width: 568px;
-    margin: 0 auto;
 }
 
 .clear-icon {
