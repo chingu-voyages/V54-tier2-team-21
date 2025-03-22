@@ -1,0 +1,14 @@
+.prompt-container,
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.prompt-container {
+    max-width: 568px;
+    margin: 0 auto;
+}
+
+.clear-icon {
+    cursor: pointer;
+}
