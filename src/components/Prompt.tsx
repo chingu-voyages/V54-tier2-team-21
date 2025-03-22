@@ -1,11 +1,24 @@
-import { Inputs } from '../types';
+import { Button } from '@mui/material';
 
 interface PromptProps {
-    formData: Inputs;
+    prompt: string;
+    onPromptSubmit: (prompt: string) => void;
 }
 
-const Prompt = ({ formData }: PromptProps) => {
-    return <p>{Object.values(formData).join(' ')}</p>;
+const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
+    return (
+        <>
+            <p>{prompt}</p>
+            <Button
+                variant="contained"
+                type="submit"
+                sx={{ m: 2 }}
+                onClick={() => onPromptSubmit(prompt)}
+            >
+                Submit
+            </Button>
+        </>
+    );
 };
 
 export default Prompt;
