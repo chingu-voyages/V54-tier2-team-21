@@ -16,8 +16,8 @@ const Footer = () => {
             </Typography> */}
             <Container
                 id="team-container"
+                maxWidth="xs"
                 sx={{
-                    maxWidth: 300,
                     marginLeft: '0',
                     paddingLeft: '0',
                 }}
