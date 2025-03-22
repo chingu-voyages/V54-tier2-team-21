@@ -63,6 +63,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                             <InputAdornment position="end">
                                 <ClearIcon
                                     onClick={() => clearField('context')}
+                                    className="clear-icon"
                                 />
                             </InputAdornment>
                         ),
@@ -84,7 +85,10 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                     input: {
                         endAdornment: (
                             <InputAdornment position="end">
-                                <ClearIcon onClick={() => clearField('task')} />
+                                <ClearIcon
+                                    onClick={() => clearField('task')}
+                                    className="clear-icon"
+                                />
                             </InputAdornment>
                         ),
                     },
@@ -107,6 +111,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                             <InputAdornment position="end">
                                 <ClearIcon
                                     onClick={() => clearField('output')}
+                                    className="clear-icon"
                                 />
                             </InputAdornment>
                         ),
@@ -130,6 +135,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                             <InputAdornment position="end">
                                 <ClearIcon
                                     onClick={() => clearField('constraint')}
+                                    className="clear-icon"
                                 />
                             </InputAdornment>
                         ),
