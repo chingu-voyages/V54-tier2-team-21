@@ -1,12 +1,17 @@
+#root {
+    margin: 0 auto;
+    text-align: center;
+}
+
 .prompt-container,
 form {
     display: flex;
     flex-direction: column;
 }
 
-.prompt-container {
+.prompt-container,
+footer {
     max-width: 568px;
-    margin: 0 auto;
 }
 
 .clear-icon {
