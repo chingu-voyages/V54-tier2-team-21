@@ -1,8 +1,9 @@
-import { Button, capitalize, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs, FormComponentProps } from '../types';
 import ClearIcon from '@mui/icons-material/Clear';
 import InputAdornment from '@mui/material/InputAdornment';
+import { capitalise } from '../utils/utils';
 
 const Form = ({ onFormSubmit }: FormComponentProps) => {
     const {
@@ -30,7 +31,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                     <TextField
                         key={field}
                         id={field}
-                        label={capitalize(field)}
+                        label={capitalise(field)}
                         variant="outlined"
                         {...register(field, {
                             required: true,
