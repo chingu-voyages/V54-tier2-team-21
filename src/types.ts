@@ -6,6 +6,11 @@ export type Inputs = {
     constraint: string;
 };
 
+export type FormField = {
+    name: 'persona' | 'context' | 'task' | 'output' | 'constraint';
+    description: string;
+};
+
 export type FormComponentProps = {
     onFormSubmit: (data: Inputs) => void;
 };
