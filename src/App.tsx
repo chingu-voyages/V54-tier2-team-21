@@ -18,7 +18,8 @@ function App() {
     }
 
     async function onPromptSubmit(prompt: string) {
-        const genAI = new GoogleGenerativeAI('ADD YOUR KEY HERE');
+        const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
+        const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
         const result = await model.generateContent(prompt);
