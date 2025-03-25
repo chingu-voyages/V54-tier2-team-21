@@ -7,13 +7,16 @@ import { Inputs } from './types';
 import Result from './components/Result';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
+import { formatPrompt } from './utils/utils';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
 
     function onFormSubmit(formData: Inputs) {
-        const prompt = Object.values(formData).join('. ');
+        const prompt = Object.values(formData)
+            .map((textAreaInput) => formatPrompt(textAreaInput))
+            .join(' ');
         setPrompt(prompt);
     }
 
