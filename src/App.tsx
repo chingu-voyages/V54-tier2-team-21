@@ -21,11 +21,21 @@ function App() {
     }
 
     async function onPromptSubmit(prompt: string) {
-        const genAI = new GoogleGenerativeAI('ADD YOUR KEY HERE');
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        try {
+            const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
+            const genAI = new GoogleGenerativeAI(apiKey);
+            const model = genAI.getGenerativeModel({
+                model: 'gemini-2.0-flash',
+            });
 
-        const result = await model.generateContent(prompt);
-        setResult(result.response.text());
+            const result = await model.generateContent(prompt);
+            setResult(result.response.text());
+        } catch (error) {
+            console.error('Error with Gemini API:', error);
+            setResult(
+                '⚠️ Oops! 5STAR AI is temporarily unavailable. Please try again later.'
+            );
+        }
     }
 
     return (
