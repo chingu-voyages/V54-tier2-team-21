@@ -40,13 +40,21 @@ function App() {
 
     return (
         <>
-            <Header />
-            <Container className="prompt-container">
-                <Form onFormSubmit={onFormSubmit} />
-                <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
-                <Result result={result} />
+            <Container
+                sx={{
+                    '@media (min-width: 0px)': {
+                        maxWidth: '550px',
+                    },
+                }}
+            >
+                <Header />
+                <Container sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Form onFormSubmit={onFormSubmit} />
+                    <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
+                    <Result result={result} />
+                </Container>
+                <Footer />
             </Container>
-            <Footer />
         </>
     );
 }
