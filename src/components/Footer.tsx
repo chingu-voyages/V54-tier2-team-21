@@ -5,9 +5,9 @@ import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-const teamMembers: Array<string> = [
+const teamMembers: string[] = [
     'Adil Rahman',
-    'Tibam Gisele',
+    'Gisele Tibam',
     'Andreea Tohatan',
     "Mark O'Brien",
     'Denys Melnyk',
@@ -16,20 +16,31 @@ const teamMembers: Array<string> = [
     'Yusuf Mohsen',
 ];
 
+const styles = {
+    typography: {
+        fontSizeSmall: '8px',
+        fontSizeNormal: '10px',
+    },
+    colors: {
+        background: '#12141D',
+        fontMain: '#FFFFFF',
+        fontSecondary: '#CBC9C9',
+    },
+};
+
 const Footer = () => {
     return (
         <Container
             component="footer"
             sx={{
-                backgroundColor: '#12141D',
+                backgroundColor: styles.colors.background,
                 margin: 0,
-                color: '#FFFFFF',
+                color: styles.colors.fontMain,
                 height: '280px',
-                padding: '28px 28px 10px 28px',
+                padding: '1.5em 1.5em 0.75em 1.5em',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                fontFamily: 'Poppins',
             }}
         >
             <Container
@@ -72,9 +83,8 @@ const Footer = () => {
                         <Grid size={12}>
                             <Typography
                                 sx={{
-                                    fontSize: '10px',
+                                    fontSize: styles.typography.fontSizeNormal,
                                     fontWeight: 'bold',
-                                    fontFamily: 'Poppins',
                                     marginBottom: '0.5em',
                                 }}
                             >
@@ -86,9 +96,10 @@ const Footer = () => {
                                 <Grid size={6}>
                                     <Typography
                                         sx={{
-                                            fontSize: '10px',
-                                            fontFamily: 'Poppins',
-                                            color: '#CBC9C9',
+                                            fontSize:
+                                                styles.typography
+                                                    .fontSizeNormal,
+                                            color: styles.colors.fontSecondary,
                                         }}
                                     >
                                         {member}
@@ -122,16 +133,16 @@ const Footer = () => {
                     />
                     <Typography
                         sx={{
-                            fontSize: '8px',
-                            color: '#CBC9C9',
+                            fontSize: styles.typography.fontSizeSmall,
+                            color: styles.colors.fontSecondary,
                         }}
                     >
                         This project was built by team 21
                     </Typography>
                     <Typography
                         sx={{
-                            fontSize: '8px',
-                            color: '#CBC9C9',
+                            fontSize: styles.typography.fontSizeSmall,
+                            color: styles.colors.fontSecondary,
                         }}
                     >
                         as part of the Chingu Voyage 54
@@ -143,8 +154,16 @@ const Footer = () => {
                     textAlign: 'center',
                 }}
             >
-                <Link href="https://github.com/chingu-voyages/V54-tier2-team-21">
-                    <Typography sx={{ fontSize: '8px', color: '#FFFFFF' }}>
+                <Link
+                    href="https://github.com/chingu-voyages/V54-tier2-team-21"
+                    aria-label="Voyage Team 21 GitHub repository"
+                >
+                    <Typography
+                        sx={{
+                            fontSize: styles.typography.fontSizeSmall,
+                            color: styles.colors.fontMain,
+                        }}
+                    >
                         <GitHubIcon sx={{ cursor: 'pointer' }} />
                     </Typography>
                 </Link>
@@ -152,9 +171,8 @@ const Footer = () => {
                 <Typography
                     component="p"
                     sx={{
-                        fontSize: '8px',
+                        fontSize: styles.typography.fontSizeSmall,
                         marginTop: '0.5em',
-                        fontFamily: 'Poppins',
                     }}
                 >
                     &copy; 2025 Chingu. All rights reserved.
