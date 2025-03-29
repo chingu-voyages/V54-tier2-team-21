@@ -8,10 +8,16 @@ import Result from './components/Result';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
 import { formatPrompt } from './utils/utils';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
+    const theme = createTheme({
+        typography: {
+            fontFamily: `"Poppins", sans-serif`,
+        },
+    });
 
     function onFormSubmit(formData: Inputs) {
         const prompt = Object.values(formData)
@@ -39,15 +45,23 @@ function App() {
     }
 
     return (
-        <>
-            <Header />
-            <Container className="prompt-container">
-                <Form onFormSubmit={onFormSubmit} />
-                <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
-                <Result result={result} />
+        <ThemeProvider theme={theme}>
+            <Container
+                sx={{
+                    '@media (min-width: 0px)': {
+                        maxWidth: 'sm',
+                    },
+                }}
+            >
+                <Header />
+                <Container sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Form onFormSubmit={onFormSubmit} />
+                    <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
+                    <Result result={result} />
+                </Container>
+                <Footer />
             </Container>
-            <Footer />
-        </>
+        </ThemeProvider>
     );
 }
 
