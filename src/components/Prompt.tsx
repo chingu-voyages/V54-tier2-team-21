@@ -11,15 +11,9 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
         <Box
             component="section"
             sx={{
-                width: '100%',
-                minHeight: '250px',
-                border: '3px solid transparent',
-                background: styles.colors.containerBackgroundWithBorder,
-                borderRadius: '8px',
-                marginBottom: '4em',
-                display: 'flex',
-                flexDirection: 'column',
+                ...styles.flexColumn,
                 justifyContent: 'space-between',
+                ...styles.displayContainer,
             }}
         >
             {prompt ? (
@@ -30,8 +24,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
                 <Box
                     component="div"
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
+                        ...styles.flexColumn,
                         alignItems: 'center',
                         marginTop: '1.5em',
                     }}
@@ -56,15 +49,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
             <Button
                 variant="contained"
                 type="submit"
-                sx={{
-                    m: 4,
-                    padding: '0.5em 2em',
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    background: styles.colors.buttonBackground,
-                    alignSelf: 'center',
-                    borderRadius: '15px',
-                }}
+                sx={{ ...styles.primaryButton }}
                 onClick={() => onPromptSubmit(prompt)}
             >
                 Submit

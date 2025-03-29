@@ -9,12 +9,7 @@ const Result = ({ result }: ResultProps) => {
         <Box
             component="section"
             sx={{
-                width: '100%',
-                minHeight: '250px',
-                border: '3px solid transparent',
-                background: styles.colors.containerBackgroundWithBorder,
-                borderRadius: '8px',
-                marginBottom: '4em',
+                ...styles.displayContainer,
             }}
         >
             {result ? (
@@ -25,12 +20,10 @@ const Result = ({ result }: ResultProps) => {
                 <Box
                     component="div"
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
+                        ...styles.flexColumn,
                         alignItems: 'center',
                         minHeight: '250px',
                         justifyContent: 'center',
-                        flexGrow: 1,
                     }}
                 >
                     <Box
