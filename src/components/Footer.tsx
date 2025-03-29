@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { styles } from '../styles';
 
 const teamMembers: string[] = [
     'Adil Rahman',
@@ -16,26 +17,14 @@ const teamMembers: string[] = [
     'Yusuf Mohsen',
 ];
 
-const styles = {
-    typography: {
-        fontSizeSmall: '8px',
-        fontSizeNormal: '10px',
-    },
-    colors: {
-        background: '#12141D',
-        fontMain: '#FFFFFF',
-        fontSecondary: '#CBC9C9',
-    },
-};
-
 const Footer = () => {
     return (
         <Container
             component="footer"
             sx={{
-                backgroundColor: styles.colors.background,
+                backgroundColor: styles.colors.footerBackground,
                 margin: 0,
-                color: styles.colors.fontMain,
+                color: styles.colors.fontPrimary,
                 height: '280px',
                 padding: '1.5em 1.5em 0.75em 1.5em',
                 display: 'flex',
@@ -83,7 +72,7 @@ const Footer = () => {
                         <Grid size={12}>
                             <Typography
                                 sx={{
-                                    fontSize: styles.typography.fontSizeNormal,
+                                    fontSize: styles.typography.fontSizeSmall,
                                     fontWeight: 'bold',
                                     marginBottom: '0.5em',
                                 }}
@@ -97,8 +86,7 @@ const Footer = () => {
                                     <Typography
                                         sx={{
                                             fontSize:
-                                                styles.typography
-                                                    .fontSizeNormal,
+                                                styles.typography.fontSizeSmall,
                                             color: styles.colors.fontSecondary,
                                         }}
                                     >
@@ -133,7 +121,7 @@ const Footer = () => {
                     />
                     <Typography
                         sx={{
-                            fontSize: styles.typography.fontSizeSmall,
+                            fontSize: styles.typography.fontSizeExtraSmall,
                             color: styles.colors.fontSecondary,
                         }}
                     >
@@ -141,7 +129,7 @@ const Footer = () => {
                     </Typography>
                     <Typography
                         sx={{
-                            fontSize: styles.typography.fontSizeSmall,
+                            fontSize: styles.typography.fontSizeExtraSmall,
                             color: styles.colors.fontSecondary,
                         }}
                     >
@@ -160,8 +148,8 @@ const Footer = () => {
                 >
                     <Typography
                         sx={{
-                            fontSize: styles.typography.fontSizeSmall,
-                            color: styles.colors.fontMain,
+                            fontSize: styles.typography.fontSizeExtraSmall,
+                            color: styles.colors.fontPrimary,
                         }}
                     >
                         <GitHubIcon sx={{ cursor: 'pointer' }} />
@@ -171,7 +159,7 @@ const Footer = () => {
                 <Typography
                     component="p"
                     sx={{
-                        fontSize: styles.typography.fontSizeSmall,
+                        fontSize: styles.typography.fontSizeExtraSmall,
                         marginTop: '0.5em',
                     }}
                 >
