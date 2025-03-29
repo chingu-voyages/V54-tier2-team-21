@@ -47,6 +47,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Container
+                disableGutters
                 sx={{
                     '@media (min-width: 0px)': {
                         maxWidth: 'sm',
