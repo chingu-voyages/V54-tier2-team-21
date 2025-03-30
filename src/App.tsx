@@ -14,6 +14,7 @@ import showdown from 'showdown';
 function App() {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const theme = createTheme({
         typography: {
             fontFamily: `"Poppins", sans-serif`,
@@ -28,6 +29,8 @@ function App() {
     }
 
     async function onPromptSubmit(prompt: string) {
+        setLoading(true);
+        setResult('');
         try {
             const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
             const genAI = new GoogleGenerativeAI(apiKey);
@@ -48,6 +51,7 @@ function App() {
                 '⚠️ Oops! 5STAR AI is temporarily unavailable. Please try again later.'
             );
         }
+        setLoading(false);
     }
 
     return (
@@ -64,7 +68,7 @@ function App() {
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Form onFormSubmit={onFormSubmit} />
                     <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
-                    <Result result={result} />
+                    <Result result={result} loading={loading} />
                 </Container>
                 <Footer />
             </Container>
