@@ -10,12 +10,17 @@ const Result = ({ result }: ResultProps) => {
             component="section"
             sx={{
                 ...styles.displayContainer,
+                p: 2,
             }}
         >
             {result ? (
-                <Typography sx={{ m: 2, color: styles.colors.fontPrimary }}>
-                    {result}
-                </Typography>
+                <Typography
+                    sx={{
+                        color: styles.colors.fontPrimary,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: result }}
+                    className="result"
+                ></Typography>
             ) : (
                 <Box
                     component="div"
