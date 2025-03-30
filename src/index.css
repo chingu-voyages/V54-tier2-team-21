@@ -13,6 +13,27 @@ form {
     flex-direction: column;
 }
 
-.clear-icon {
-    cursor: pointer;
+/* Only added to style the html that is generated from the Markdown */
+
+.result {
+    line-height: 1.7;
+}
+
+/* Apply margin to all child elements of .result only */
+.result > * {
+    margin-bottom: 0.75em;
+}
+
+/* Apply smaller margin to all of the decendants of the child elements of .result */
+.result > * * {
+    margin-bottom: 0.5em;
+}
+
+.result a {
+    color: #ffffff;
+}
+
+.result ul,
+.result ol {
+    padding-left: 1rem;
 }

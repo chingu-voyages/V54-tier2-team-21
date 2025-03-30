@@ -9,6 +9,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
 import { formatPrompt } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import showdown from 'showdown';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -35,7 +36,12 @@ function App() {
             });
 
             const result = await model.generateContent(prompt);
-            setResult(result.response.text());
+
+            const converter = new showdown.Converter();
+
+            const data = converter.makeHtml(result.response.text());
+
+            setResult(data);
         } catch (error) {
             console.error('Error with Gemini API:', error);
             setResult(
