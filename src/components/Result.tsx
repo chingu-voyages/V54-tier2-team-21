@@ -1,10 +1,15 @@
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
+import Container from '@mui/material/Container';
+import ProgressIndicator from './ProgressIndicator';
+
 interface ResultProps {
     result: string;
+    loading: boolean;
 }
-const Result = ({ result }: ResultProps) => {
+
+const Result = ({ result, loading }: ResultProps) => {
     return (
         <Box
             component="section"
@@ -31,6 +36,17 @@ const Result = ({ result }: ResultProps) => {
                         justifyContent: 'center',
                     }}
                 >
+                    {loading && (
+                        <Container
+                            sx={{
+                                display: styles.flexRow,
+                                justifyContent: 'center',
+                                marginBottom: '1em',
+                            }}
+                        >
+                            <ProgressIndicator />
+                        </Container>
+                    )}
                     <Box
                         component="img"
                         src="./src/assets/gemini-logo.png"
