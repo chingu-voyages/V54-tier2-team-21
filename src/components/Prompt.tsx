@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
+import { styles } from '../styles';
 interface PromptProps {
     prompt: string;
     onPromptSubmit: (prompt: string) => void;
@@ -7,44 +8,53 @@ interface PromptProps {
 
 const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
     return (
-        <>
-            <Box
-                component="section"
-                sx={{
-                    width: '100%',
-                    minHeight: '250px',
-                    border: '3px solid transparent',
-                    background:
-                        'linear-gradient(#313342, #313342) padding-box, linear-gradient(to right, #8A00F9 0%, #FD99FF 100%) border-box',
-                    borderRadius: '8px',
-                    marginBottom: '4em',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                }}
-            >
-                <Typography sx={{ m: 2, color: '#FFFFFF' }}>
-                    {prompt ? prompt : 'PLEASE ENTER A PROMPT'}
+        <Box
+            component="section"
+            sx={{
+                ...styles.flexColumn,
+                justifyContent: 'space-between',
+                ...styles.displayContainer,
+            }}
+        >
+            {prompt ? (
+                <Typography sx={{ m: 2, color: styles.colors.fontPrimary }}>
+                    {prompt}
                 </Typography>
-                <Button
-                    variant="contained"
-                    type="submit"
+            ) : (
+                <Box
+                    component="div"
                     sx={{
-                        m: 4,
-                        padding: '0.5em 2em',
-                        fontSize: '1rem',
-                        fontWeight: 600,
-                        background:
-                            'linear-gradient(to right, #8A00F9 0%, #FD99FF 100%)',
-                        alignSelf: 'center',
-                        borderRadius: '15px',
+                        ...styles.flexColumn,
+                        alignItems: 'center',
+                        marginTop: '1.5em',
                     }}
-                    onClick={() => onPromptSubmit(prompt)}
                 >
-                    Submit
-                </Button>
-            </Box>
-        </>
+                    <Box
+                        component="img"
+                        src="./src/assets/star-logo.png"
+                        alt="Dark 5 pointed star with white circular background"
+                        sx={{
+                            width: '63px',
+                            height: '63px',
+                        }}
+                    />
+                    <Typography
+                        sx={{ m: 2, color: styles.colors.fontSecondary }}
+                    >
+                        PLEASE ENTER A PROMPT
+                    </Typography>
+                </Box>
+            )}
+
+            <Button
+                variant="contained"
+                type="submit"
+                sx={{ ...styles.primaryButton }}
+                onClick={() => onPromptSubmit(prompt)}
+            >
+                Submit
+            </Button>
+        </Box>
     );
 };
 
