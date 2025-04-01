@@ -7,6 +7,8 @@ import Prompt from './components/Prompt';
 import { Inputs } from './types';
 import Result from './components/Result';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import Hero from './components/Hero';
+import HowToUse from './components/HowToUse';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -28,6 +30,8 @@ function App() {
     return (
         <>
             {/* <Header /> */}
+            <Hero />
+            <HowToUse />
             <div className="prompt-container">
                 <Form onFormSubmit={onFormSubmit} />
                 <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
