@@ -9,10 +9,12 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
 import { formatPrompt } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import showdown from 'showdown';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const theme = createTheme({
         typography: {
             fontFamily: `"Poppins", sans-serif`,
@@ -27,6 +29,8 @@ function App() {
     }
 
     async function onPromptSubmit(prompt: string) {
+        setLoading(true);
+        setResult('');
         try {
             const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
             const genAI = new GoogleGenerativeAI(apiKey);
@@ -35,13 +39,19 @@ function App() {
             });
 
             const result = await model.generateContent(prompt);
-            setResult(result.response.text());
+
+            const converter = new showdown.Converter();
+
+            const data = converter.makeHtml(result.response.text());
+
+            setResult(data);
         } catch (error) {
             console.error('Error with Gemini API:', error);
             setResult(
                 '⚠️ Oops! 5STAR AI is temporarily unavailable. Please try again later.'
             );
         }
+        setLoading(false);
     }
 
     return (
@@ -58,7 +68,7 @@ function App() {
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Form onFormSubmit={onFormSubmit} />
                     <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
-                    <Result result={result} />
+                    <Result result={result} loading={loading} />
                 </Container>
                 <Footer />
             </Container>

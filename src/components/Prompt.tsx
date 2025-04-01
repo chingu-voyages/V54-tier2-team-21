@@ -17,7 +17,13 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
             }}
         >
             {prompt ? (
-                <Typography sx={{ m: 2, color: styles.colors.fontPrimary }}>
+                <Typography
+                    sx={{
+                        m: 2,
+                        color: styles.colors.fontPrimary,
+                        lineHeight: 1.7,
+                    }}
+                >
                     {prompt}
                 </Typography>
             ) : (

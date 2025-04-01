@@ -1,21 +1,31 @@
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
+import Container from '@mui/material/Container';
+import ProgressIndicator from './ProgressIndicator';
+
 interface ResultProps {
     result: string;
+    loading: boolean;
 }
-const Result = ({ result }: ResultProps) => {
+
+const Result = ({ result, loading }: ResultProps) => {
     return (
         <Box
             component="section"
             sx={{
                 ...styles.displayContainer,
+                p: 2,
             }}
         >
             {result ? (
-                <Typography sx={{ m: 2, color: styles.colors.fontPrimary }}>
-                    {result}
-                </Typography>
+                <Typography
+                    sx={{
+                        color: styles.colors.fontPrimary,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: result }}
+                    className="result"
+                ></Typography>
             ) : (
                 <Box
                     component="div"
@@ -26,6 +36,17 @@ const Result = ({ result }: ResultProps) => {
                         justifyContent: 'center',
                     }}
                 >
+                    {loading && (
+                        <Container
+                            sx={{
+                                display: styles.flexRow,
+                                justifyContent: 'center',
+                                marginBottom: '1em',
+                            }}
+                        >
+                            <ProgressIndicator />
+                        </Container>
+                    )}
                     <Box
                         component="img"
                         src="./src/assets/gemini-logo.png"
