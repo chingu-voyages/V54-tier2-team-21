@@ -49,7 +49,7 @@ const Result = ({ result, loading }: ResultProps) => {
                     )}
                     <Box
                         component="img"
-                        src="./src/assets/gemini-logo.png"
+                        src="./public/gemini-logo.png"
                         alt="Blue diamond with arched edges"
                         sx={{
                             width: '72px',
