@@ -5,7 +5,6 @@ import Prompt from './components/Prompt';
 import Footer from './components/Footer';
 import { Inputs } from './types';
 import Result from './components/Result';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
 import { formatPrompt } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -32,19 +31,24 @@ function App() {
         setLoading(true);
         setResult('');
         try {
-            const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
-            const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({
-                model: 'gemini-2.0-flash',
-            });
+            const result = await fetch(
+                'https://v54-tier2-team-21-be.onrender.com/api/send_prompt/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt_text: prompt }),
+                }
+            );
 
-            const result = await model.generateContent(prompt);
+            const data = await result.json();
 
             const converter = new showdown.Converter();
 
-            const data = converter.makeHtml(result.response.text());
+            const convertedData = converter.makeHtml(data.api_response_text);
 
-            setResult(data);
+            setResult(convertedData);
         } catch (error) {
             console.error('Error with Gemini API:', error);
             setResult(
