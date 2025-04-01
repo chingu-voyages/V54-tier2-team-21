@@ -33,4 +33,15 @@ export const styles = {
         alignSelf: 'center',
         borderRadius: '15px',
     },
+    textField: {
+        backgroundColor: 'transparent',
+        '& label': { color: '#FFFFFF' }, // we're not displaying label currently
+        '& .MuiOutlinedInput-root': {
+            color: '#FFFFFF',
+            backgroundColor: 'transparent', // should technically be '#D5D5D7'
+            '& fieldset': { borderColor: '#595959' },
+            '&:hover fieldset': { borderColor: 'lightgray' },
+            '&.Mui-focused fieldset': { borderColor: 'lightgray' },
+        },
+    },
 };

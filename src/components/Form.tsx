@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     IconButton,
     TextField,
@@ -13,6 +14,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { capitalise } from '../utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputFormSchema } from '../assets/inputFormSchema';
+import { styles } from '../styles';
 
 const formFields: FormField[] = [
     {
@@ -57,64 +59,96 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
     const clearField = (field: FormField) => {
         setValue(field.name, '');
     };
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            {formFields.map((field) => (
-                <>
-                    <span
-                        style={{
-                            display: 'inline-block',
-                            alignSelf: 'flex-start',
-                        }}
-                    >
-                        <Tooltip title={field.description}>
-                            <IconButton>
-                                <HelpOutlineIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </span>
-
-                    <TextField
-                        key={field.name}
-                        id={field.name}
-                        label={capitalise(field.name)}
-                        variant="outlined"
-                        {...register(field.name, {
-                            required: true,
-                        })}
-                        error={!!errors[field.name]} // explain
-                        sx={{ m: 2 }}
-                        multiline
-                        rows={5}
-                        slotProps={{
-                            input: {
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <ClearIcon
-                                            onClick={() => clearField(field)}
-                                            className="clear-icon"
-                                        />
-                                    </InputAdornment>
-                                ),
-                            },
-                        }}
-                    />
-                    {errors[field.name] && (
-                        <Typography
-                            color="error"
-                            variant="caption"
-                            sx={{ ml: 2 }}
+        <Box
+            component="section"
+            sx={{
+                ...styles.flexColumn,
+                justifyContent: 'space-between',
+                ...styles.displayContainer,
+                padding: 2,
+            }}
+        >
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {formFields.map((field) => (
+                    <>
+                        <span
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                marginLeft: 20,
+                            }}
                         >
-                            {errors[field.name]?.message}
-                        </Typography>
-                    )}
-                </>
-            ))}
-            <Button variant="contained" type="submit" sx={{ m: 2 }}>
-                Generate
-            </Button>
-        </form>
+                            <Typography
+                                sx={{
+                                    color: styles.colors.fontPrimary,
+                                }}
+                            >
+                                {capitalise(field.name)}
+                            </Typography>
+                            <Tooltip title={field.description}>
+                                <IconButton
+                                    sx={{
+                                        color: styles.colors.fontPrimary,
+                                    }}
+                                >
+                                    <HelpOutlineIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </span>
+
+                        <TextField
+                            key={field.name}
+                            id={field.name}
+                            variant="outlined"
+                            {...register(field.name, {
+                                required: true,
+                            })}
+                            error={!!errors[field.name]}
+                            sx={styles.textField}
+                            multiline
+                            rows={5}
+                            slotProps={{
+                                input: {
+                                    placeholder: field.description,
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <ClearIcon
+                                                onClick={() =>
+                                                    clearField(field)
+                                                }
+                                                sx={{
+                                                    color: styles.colors
+                                                        .fontPrimary,
+                                                }}
+                                                className="clear-icon"
+                                            />
+                                        </InputAdornment>
+                                    ),
+                                },
+                            }}
+                        />
+                        {errors[field.name] && (
+                            <Typography
+                                color="error"
+                                variant="caption"
+                                sx={{ ml: 2 }}
+                            >
+                                {errors[field.name]?.message}
+                            </Typography>
+                        )}
+                    </>
+                ))}
+                <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{ ...styles.primaryButton }}
+                >
+                    Generate
+                </Button>
+            </form>
+        </Box>
     );
 };
 
