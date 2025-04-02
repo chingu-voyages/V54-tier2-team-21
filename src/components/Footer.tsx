@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { styles } from '../styles';
+import chinguLogo from '../assets/chingu-logo.png';
 
 const teamMembers: string[] = [
     'Adil Rahman',
@@ -51,7 +52,7 @@ const Footer = () => {
                 <Container disableGutters>
                     <Box
                         component="img"
-                        src="./src/assets/logo.png"
+                        src="/logo.png"
                         alt="Five star api logo"
                         sx={{
                             width: '95px',
@@ -111,7 +112,8 @@ const Footer = () => {
                 >
                     <Box
                         component="img"
-                        src="./public/chingu-logo.png"
+                        // src="/chingu-logo.png"
+                        src={chinguLogo}
                         alt="Chingu logo"
                         sx={{
                             width: '30px',

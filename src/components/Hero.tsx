@@ -1,11 +1,7 @@
 const Hero = () => {
     return (
         <>
-            <img
-                src="../../public/logo.gif"
-                alt="Image of pentagram"
-                height={200}
-            />
+            <img src="/logo.gif" alt="Image of pentagram" height={200} />
             <h2 className="title">
                 Better Prompts <br /> For Better <span className="ai">AI</span>
             </h2>
