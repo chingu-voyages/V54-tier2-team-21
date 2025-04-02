@@ -1,3 +1,4 @@
+import '../src/App.css';
 import { useState } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
@@ -10,6 +11,8 @@ import Container from '@mui/material/Container';
 import { formatPrompt } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import showdown from 'showdown';
+import Hero from './components/Hero';
+import HowToUse from './components/HowToUse';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -65,6 +68,8 @@ function App() {
                 }}
             >
                 <Header />
+                <Hero />
+                <HowToUse />
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Form onFormSubmit={onFormSubmit} />
                     <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
