@@ -11,3 +11,9 @@ export type FormField = {
 export type FormComponentProps = {
     onFormSubmit: (data: Inputs) => void;
 };
+
+export type TeamMembers = {
+    name: string;
+    linkedIn?: string;
+    gitHub: string;
+};
