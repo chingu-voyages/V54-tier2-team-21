@@ -48,10 +48,10 @@ const Footer = () => {
                     },
                 }}
             >
-                <Container disableGutters>
+                <Container disableGutters sx={{ textAlign: 'left' }}>
                     <Box
                         component="img"
-                        src="./src/assets/logo.png"
+                        src="/logo.png"
                         alt="Five star api logo"
                         sx={{
                             width: '95px',
@@ -82,7 +82,7 @@ const Footer = () => {
                         </Grid>
                         {teamMembers.map((member) => {
                             return (
-                                <Grid size={6}>
+                                <Grid size={6} key={member}>
                                     <Typography
                                         sx={{
                                             fontSize:
