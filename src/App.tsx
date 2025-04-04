@@ -69,6 +69,7 @@ function App() {
                     '@media (min-width: 0px)': {
                         maxWidth: 'sm',
                     },
+                    backgroundColor: '#090015',
                 }}
             >
                 <Header />
