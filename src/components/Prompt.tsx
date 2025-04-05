@@ -13,7 +13,8 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
             sx={{
                 ...styles.flexColumn,
                 justifyContent: 'space-between',
-                ...styles.displayContainer,
+                ...styles.container,
+                ...styles.promptContainer,
             }}
         >
             {prompt ? (
