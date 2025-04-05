@@ -1,9 +1,15 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
+import { HeaderComponentProps } from '../types';
 
-const Header = () => {
+const Header = ({
+    handleDisplayLogin,
+    displayLogin,
+    isLoggedIn,
+    handleLogout,
+}: HeaderComponentProps) => {
     return (
         <Container
             component="header"
@@ -24,6 +30,18 @@ const Header = () => {
                     height: '32px',
                 }}
             />
+            <Container>
+                {!displayLogin && (
+                    <Button
+                        variant="contained"
+                        type="button"
+                        sx={{ ...styles.primaryButton }}
+                        onClick={isLoggedIn ? handleLogout : handleDisplayLogin}
+                    >
+                        {isLoggedIn ? 'Logout' : 'Login'}
+                    </Button>
+                )}
+            </Container>
             <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
                 April 2025
             </Typography>
