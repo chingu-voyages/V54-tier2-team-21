@@ -17,6 +17,7 @@ const Result = ({ result, loading }: ResultProps) => {
                 ...styles.container,
                 p: 2,
             }}
+            aria-label="Text area for displaying the result from the Gemini API"
         >
             {result ? (
                 <Typography
