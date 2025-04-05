@@ -1,23 +1,65 @@
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { styles } from '../styles';
+
 const Hero = () => {
     return (
-        <>
-            <img
-                src="../../public/logo.gif"
-                alt="Image of pentagram"
-                height={200}
+        <Box
+            component="section"
+            sx={{
+                marginTop: '1.75em',
+                marginBottom: '1.75em',
+                padding: '1.75em',
+            }}
+        >
+            <Box
+                component="img"
+                src="/logo.gif"
+                alt="Spinning gif of a purple and torquoise pentagon"
+                sx={{
+                    height: 200,
+                    marginBottom: '1em',
+                }}
             />
-            <h2 className="title">
-                Better Prompts <br /> For Better <span className="ai">AI</span>
-            </h2>
-            <p className="description">
-                With our start prompt builder, optimize your AI interactions by
-                crafting precise, customized instructions for Google Gemini.
-            </p>
-            <p className="tagline">
-                <span className="five-stars">Five Stars</span> Prompting, <br />{' '}
-                One Powerful AI Result
-            </p>
-        </>
+            <Typography
+                variant="h2"
+                sx={{
+                    fontWeight: 700,
+                    fontSize: '2.25rem',
+                    marginBottom: '0.5em',
+                }}
+            >
+                Better Prompts <br /> For Better{' '}
+                <Box component="span" className="ai">
+                    AI
+                </Box>
+            </Typography>
+            <Typography sx={{ marginBottom: '1.5em' }}>
+                Optimize your AI interactions by crafting precise, customized
+                instructions for{' '}
+                <Box component="span" sx={{ fontWeight: 700 }}>
+                    Google Gemini.
+                </Box>
+            </Typography>
+            <Typography>
+                <Box component="span" className="five-stars">
+                    Five Stars
+                </Box>{' '}
+                Prompting,
+            </Typography>
+            <Typography>One Powerful AI Result</Typography>
+            {/* <Button
+                variant="contained"
+                type="button"
+                sx={{ ...styles.primaryButton, margin: '1em' }}
+            >
+                Start now
+            </Button> */}
+            <Typography sx={{ fontSize: styles.typography.fontSizeNormal }}>
+                Try it, it's free
+            </Typography>
+        </Box>
     );
 };
 
