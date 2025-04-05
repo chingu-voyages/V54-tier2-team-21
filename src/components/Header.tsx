@@ -30,21 +30,28 @@ const Header = ({
                     height: '32px',
                 }}
             />
-            <Container>
+            <Container
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
+                    gap: 2,
+                }}
+            >
                 {!displayLogin && (
                     <Button
                         variant="contained"
                         type="button"
-                        sx={{ ...styles.primaryButton }}
+                        sx={{ ...styles.secondaryButton }}
                         onClick={isLoggedIn ? handleLogout : handleDisplayLogin}
                     >
                         {isLoggedIn ? 'Logout' : 'Login'}
                     </Button>
                 )}
+                <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
+                    April 2025
+                </Typography>
             </Container>
-            <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
-                April 2025
-            </Typography>
         </Container>
     );
 };
