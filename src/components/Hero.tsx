@@ -49,13 +49,13 @@ const Hero = () => {
                 Prompting,
             </Typography>
             <Typography>One Powerful AI Result</Typography>
-            <Button
+            {/* <Button
                 variant="contained"
                 type="button"
                 sx={{ ...styles.primaryButton, margin: '1em' }}
             >
                 Start now
-            </Button>
+            </Button> */}
             <Typography sx={{ fontSize: styles.typography.fontSizeNormal }}>
                 Try it, it's free
             </Typography>
