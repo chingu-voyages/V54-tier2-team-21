@@ -14,7 +14,7 @@ const Result = ({ result, loading }: ResultProps) => {
         <Box
             component="section"
             sx={{
-                ...styles.displayContainer,
+                ...styles.container,
                 p: 2,
             }}
         >
