@@ -40,6 +40,14 @@ export const styles = {
         alignSelf: 'center',
         borderRadius: '15px',
     },
+    secondaryButton: {
+        padding: '0.25em 1em',
+        fontSize: '0.75rem',
+        fontWeight: 600,
+        background: 'linear-gradient(to right, #8A00F9 0%, #FD99FF 100%)',
+        alignSelf: 'center',
+        borderRadius: '15px',
+    },
     textField: {
         backgroundColor: '#595959',
         '& label': { color: '#FFFFFF' }, // we're not displaying label currently
