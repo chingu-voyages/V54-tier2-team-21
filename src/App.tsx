@@ -69,7 +69,9 @@ function App() {
                     '@media (min-width: 0px)': {
                         maxWidth: 'sm',
                     },
-                    backgroundColor: '#090015',
+                    backgroundImage: 'url("background.png")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                 }}
             >
                 <Header />
