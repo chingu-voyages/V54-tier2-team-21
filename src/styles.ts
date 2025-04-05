@@ -30,6 +30,13 @@ export const styles = {
         borderRadius: '8px',
         marginBottom: '4em',
     },
+    loginContainer: {
+        minHeight: '250px',
+        border: '3px solid #595959',
+        backgroundColor: '#313342',
+        borderRadius: '8px',
+        marginBottom: '4em',
+    },
     flexRow: {
         display: 'flex',
     },
