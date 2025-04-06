@@ -24,11 +24,11 @@ function App() {
             fontFamily: `"Poppins", sans-serif`,
         },
     });
-    const [displayLogin, setDisplayLogin] = useState<boolean>(false);
+    const [page, setPage] = useState<string>('');
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    function handleDisplayLogin() {
-        setDisplayLogin(true);
+    function handleSignupClick() {
+        setPage('signup');
     }
 
     function onFormSubmit(formData: Inputs) {
@@ -38,8 +38,13 @@ function App() {
         setPrompt(prompt);
     }
 
+    function handleSwitchLoginPageClick() {
+        setPage(page === 'signup' ? 'login' : 'signup');
+    }
+
     function handleLoginClick(data: LoginForm) {
-        setDisplayLogin(false);
+        console.log(data);
+        setPage('');
         setIsLoggedIn(true);
         document.cookie = 'token=12565235632';
     }
@@ -103,13 +108,17 @@ function App() {
                 }}
             >
                 <Header
-                    handleDisplayLogin={handleDisplayLogin}
-                    displayLogin={displayLogin}
+                    handleSignupClick={handleSignupClick}
+                    page={page}
                     isLoggedIn={isLoggedIn}
                     handleLogout={handleLogout}
                 />
-                {displayLogin ? (
-                    <Login handleLoginClick={handleLoginClick} />
+                {page !== '' ? (
+                    <Login
+                        handleLoginClick={handleLoginClick}
+                        handleSwitchLoginPageClick={handleSwitchLoginPageClick}
+                        page={page}
+                    />
                 ) : (
                     <>
                         <Hero />

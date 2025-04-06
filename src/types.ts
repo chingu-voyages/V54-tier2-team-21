@@ -18,14 +18,16 @@ export type FormComponentProps = {
 };
 
 export type HeaderComponentProps = {
-    handleDisplayLogin: () => void;
-    displayLogin: boolean;
+    handleSignupClick: () => void;
+    page: string;
     isLoggedIn: boolean;
     handleLogout: () => void;
 };
 
 export type LoginComponentProps = {
     handleLoginClick: (data: LoginForm) => void;
+    handleSwitchLoginPageClick: () => void;
+    page: string;
 };
 
 export type TeamMembers = {

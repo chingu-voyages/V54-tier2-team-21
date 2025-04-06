@@ -5,8 +5,8 @@ import { styles } from '../styles';
 import { HeaderComponentProps } from '../types';
 
 const Header = ({
-    handleDisplayLogin,
-    displayLogin,
+    handleSignupClick,
+    page,
     isLoggedIn,
     handleLogout,
 }: HeaderComponentProps) => {
@@ -38,14 +38,14 @@ const Header = ({
                     gap: 2,
                 }}
             >
-                {!displayLogin && (
+                {page === '' && (
                     <Button
                         variant="contained"
                         type="button"
                         sx={{ ...styles.secondaryButton }}
-                        onClick={isLoggedIn ? handleLogout : handleDisplayLogin}
+                        onClick={isLoggedIn ? handleLogout : handleSignupClick}
                     >
-                        {isLoggedIn ? 'Logout' : 'Login'}
+                        {isLoggedIn ? 'Logout' : 'Sign up'}
                     </Button>
                 )}
                 <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
