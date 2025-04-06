@@ -17,6 +17,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
                 ...styles.promptContainer,
             }}
             aria-label="Text area for displaying the 5 prompts combined"
+            tabIndex={0}
         >
             {prompt ? (
                 <Typography
