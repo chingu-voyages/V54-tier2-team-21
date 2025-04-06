@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import showdown from 'showdown';
 import Hero from './components/Hero';
 import HowToUse from './components/HowToUse';
+import { useRef } from 'react';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -22,6 +23,11 @@ function App() {
             fontFamily: `"Poppins", sans-serif`,
         },
     });
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleFocus = () => {
+        inputRef.current?.focus();
+    };
 
     function onFormSubmit(formData: Inputs) {
         const prompt = Object.values(formData)
@@ -75,10 +81,10 @@ function App() {
                 }}
             >
                 <Header />
-                <Hero />
+                <Hero onFocusInput={handleFocus} />
                 <HowToUse />
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Form onFormSubmit={onFormSubmit} />
+                    <Form onFormSubmit={onFormSubmit} ref={inputRef} />
                     <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
                     <Result result={result} loading={loading} />
                 </Container>

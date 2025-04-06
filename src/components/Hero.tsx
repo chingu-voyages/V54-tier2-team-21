@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styles } from '../styles';
 
-const Hero = () => {
+const Hero = ({ onFocusInput }: { onFocusInput: () => void }) => {
     return (
         <Box
             component="section"
@@ -49,13 +49,14 @@ const Hero = () => {
                 Prompting,
             </Typography>
             <Typography>One Powerful AI Result</Typography>
-            {/* <Button
+            <Button
                 variant="contained"
                 type="button"
                 sx={{ ...styles.primaryButton, margin: '1em' }}
+                onClick={onFocusInput}
             >
                 Start now
-            </Button> */}
+            </Button>
             <Typography sx={{ fontSize: styles.typography.fontSizeNormal }}>
                 Try it, it's free
             </Typography>

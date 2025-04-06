@@ -44,7 +44,7 @@ Set the boundaries: "US based only", "In British English", "no hyphenation", "Av
     },
 ];
 
-const Form = ({ onFormSubmit }: FormComponentProps) => {
+const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
     const {
         register,
         handleSubmit,
@@ -60,6 +60,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
         setValue(field.name, '');
         document.getElementById(field.name)?.focus();
     };
+
     return (
         <Box component="section" sx={{ marginTop: '4em' }}>
             <Typography
@@ -89,7 +90,7 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                 }}
             >
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {formFields.map((field) => (
+                    {formFields.map((field, index) => (
                         <>
                             <span
                                 style={{
@@ -154,6 +155,8 @@ const Form = ({ onFormSubmit }: FormComponentProps) => {
                                         ),
                                     },
                                 }}
+                                inputRef={index === 0 ? ref : null}
+                                tabIndex={0}
                             />
                             {errors[field.name] && (
                                 <Typography
