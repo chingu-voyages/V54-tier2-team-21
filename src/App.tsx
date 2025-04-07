@@ -18,6 +18,7 @@ function App() {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [isPromptSubmitted, setIsPromptSubmitted] = useState<boolean>(false);
     const theme = createTheme({
         typography: {
             fontFamily: `"Poppins", sans-serif`,
@@ -30,6 +31,7 @@ function App() {
     };
 
     function onFormSubmit(formData: Inputs) {
+        setIsPromptSubmitted(false);
         const prompt = Object.values(formData)
             .map((textAreaInput) => formatPrompt(textAreaInput))
             .join(' ');
@@ -39,6 +41,7 @@ function App() {
     async function onPromptSubmit(prompt: string) {
         setLoading(true);
         setResult('');
+        setIsPromptSubmitted(true);
         try {
             const result = await fetch(
                 'https://v54-tier2-team-21-be.onrender.com/api/send_prompt/',
@@ -85,7 +88,11 @@ function App() {
                 <HowToUse />
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Form onFormSubmit={onFormSubmit} ref={inputRef} />
-                    <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
+                    <Prompt
+                        prompt={prompt}
+                        onPromptSubmit={onPromptSubmit}
+                        isPromptSubmitted={isPromptSubmitted}
+                    />
                     <Result result={result} loading={loading} />
                 </Container>
                 <Footer />

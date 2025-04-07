@@ -4,9 +4,10 @@ import { styles } from '../styles';
 interface PromptProps {
     prompt: string;
     onPromptSubmit: (prompt: string) => void;
+    isPromptSubmitted: boolean;
 }
 
-const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
+const Prompt = ({ prompt, onPromptSubmit, isPromptSubmitted }: PromptProps) => {
     return (
         <Box
             component="section"
@@ -60,6 +61,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
                 type="submit"
                 sx={{ ...styles.primaryButton }}
                 onClick={() => onPromptSubmit(prompt)}
+                disabled={prompt === '' || isPromptSubmitted ? true : false}
             >
                 Submit
             </Button>
