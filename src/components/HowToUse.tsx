@@ -16,7 +16,7 @@ const instructions = [
 const HowToUse = () => {
     return (
         <>
-            <h2>
+            <h2 className="how-to-use-title">
                 HOW TO USE <br /> 5TAR AI
             </h2>
             <div className="instructions-container">

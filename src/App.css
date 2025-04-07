@@ -6,6 +6,7 @@ body {
     text-align: center;
     background-color: #1e1e1e;
     color: #ffffff;
+    font-family: sans-serif;
 }
 
 .description {
@@ -31,18 +32,25 @@ body {
     color: white;
 }
 
+.how-to-use-title {
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+    font-size: 2rem;
+}
+
 .instructions-container {
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 20px;
+    gap: 40px;
     margin: auto;
 }
 
 .instructions-box {
     background-color: #37394a;
-    padding: 4px;
+    padding: 20px;
+    height: 140px;
     text-align: center;
     border-radius: 5px;
     color: #8a8a93;
@@ -50,5 +58,7 @@ body {
 }
 
 .instruction-title {
-    color: #dfe0ee;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
 }
