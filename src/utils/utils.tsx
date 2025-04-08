@@ -11,4 +11,13 @@ const formatPrompt = (prompt: string) => {
     return (startsWithUpperCase ? prompt : capitalise(prompt)) + '.';
 };
 
-export { formatPrompt, capitalise };
+function setCookie(name: string, value: string, days = 7) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; Secure; SameSite=Strict`;
+}
+
+function clearCookie(name: string) {
+    document.cookie = `${name}=;  path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; Secure; SameSite=Strict`;
+}
+
+export { formatPrompt, capitalise, setCookie, clearCookie };

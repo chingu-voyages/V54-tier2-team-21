@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import { Inputs } from './types';
 import Result from './components/Result';
 import Container from '@mui/material/Container';
-import { formatPrompt } from './utils/utils';
+import { formatPrompt, setCookie, clearCookie } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import showdown from 'showdown';
 import Hero from './components/Hero';
@@ -27,6 +27,7 @@ function App() {
     });
     const [page, setPage] = useState<string>('');
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [loginError, setLoginError] = useState<string>('');
 
     function handleSignupClick() {
         setPage('signup');
@@ -46,18 +47,49 @@ function App() {
 
     function handleSwitchLoginPageClick() {
         setPage(page === 'signup' ? 'login' : 'signup');
+        setLoginError('');
     }
 
-    function handleLoginClick(data: LoginForm) {
-        console.log(data);
-        setPage('');
-        setIsLoggedIn(true);
-        document.cookie = 'token=12565235632';
+    async function handleLoginClick(loginData: LoginForm) {
+        try {
+            const result = await fetch(
+                `https://v54-tier2-team-21-be.onrender.com/api/users/${page === 'signup' ? 'register' : 'login'}/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: loginData.email,
+                        password: loginData.password,
+                    }),
+                }
+            );
+
+            const data = await result.json();
+
+            if (data.errors.non_field_errors) {
+                throw new Error(data.errors.non_field_errors);
+            }
+
+            setPage('');
+            setIsLoggedIn(true);
+
+            setCookie('aghyt', data.access_token, 1);
+            setCookie('jkiuru', data.refresh_token, 1);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                setLoginError(error.message);
+            } else {
+                setLoginError('An unknown error occurred');
+            }
+        }
     }
 
     function handleLogout() {
-        document.cookie =
-            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        clearCookie('aghyt');
+        clearCookie('jkiuru');
         setIsLoggedIn(false);
     }
 
@@ -124,6 +156,7 @@ function App() {
                         handleLoginClick={handleLoginClick}
                         handleSwitchLoginPageClick={handleSwitchLoginPageClick}
                         page={page}
+                        loginError={loginError}
                     />
                 ) : (
                     <>

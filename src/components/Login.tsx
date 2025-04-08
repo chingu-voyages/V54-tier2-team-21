@@ -6,17 +6,21 @@ import Container from '@mui/material/Container';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import InputAdornment from '@mui/material/InputAdornment';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { inputLoginSchema } from '../assets/inputFormSchema';
 
 const Login = ({
     handleLoginClick,
     handleSwitchLoginPageClick,
     page,
+    loginError,
 }: LoginComponentProps) => {
     const {
         register,
         handleSubmit,
-        // formState: { errors },
-    } = useForm<LoginForm>();
+        reset,
+        formState: { errors },
+    } = useForm<LoginForm>({ resolver: zodResolver(inputLoginSchema) });
 
     const onSubmit: SubmitHandler<LoginForm> = (data) => handleLoginClick(data);
 
@@ -37,7 +41,6 @@ const Login = ({
                 sx={{
                     ...styles.loginContainer,
                     paddingBottom: '3em',
-                    minHeight: '400px',
                     margin: '3em 1.25em',
                 }}
             >
@@ -48,7 +51,7 @@ const Login = ({
                             flexDirection: 'column',
                             justifyContent: 'center',
                             gap: '10px',
-                            height: '400px',
+                            minHeight: '400px',
                         }}
                     >
                         <TextField
@@ -57,7 +60,7 @@ const Login = ({
                             {...register('email', {
                                 required: true,
                             })}
-                            sx={{ ...styles.textField }}
+                            sx={{ ...styles.textField, mb: 0 }}
                             slotProps={{
                                 input: {
                                     placeholder: 'Email',
@@ -72,7 +75,17 @@ const Login = ({
                                     ),
                                 },
                             }}
+                            error={!!errors['email']}
                         />
+                        {errors['email'] && (
+                            <Typography
+                                color="error"
+                                variant="caption"
+                                sx={{ ml: 1, textAlign: 'left' }}
+                            >
+                                {errors['email']?.message}
+                            </Typography>
+                        )}
                         <TextField
                             id="password"
                             variant="outlined"
@@ -80,7 +93,7 @@ const Login = ({
                             {...register('password', {
                                 required: true,
                             })}
-                            sx={{ ...styles.textField }}
+                            sx={{ ...styles.textField, mt: 1, mb: 0 }}
                             slotProps={{
                                 input: {
                                     placeholder:
@@ -98,7 +111,30 @@ const Login = ({
                                     ),
                                 },
                             }}
+                            error={!!errors['email']}
                         />
+                        {errors['password'] && (
+                            <Typography
+                                color="error"
+                                variant="caption"
+                                sx={{ ml: 1, textAlign: 'left' }}
+                            >
+                                {errors['password']?.message}
+                            </Typography>
+                        )}
+                        {loginError && (
+                            <Typography
+                                color="error"
+                                variant="caption"
+                                sx={{
+                                    ml: 1,
+                                    textAlign: 'left',
+                                    fontSize: '.9rem',
+                                }}
+                            >
+                                {loginError}
+                            </Typography>
+                        )}
                         <Button
                             variant="contained"
                             type="submit"
@@ -126,7 +162,10 @@ const Login = ({
                         fontWeight: 700,
                         fontSize: '1rem',
                     }}
-                    onClick={handleSwitchLoginPageClick}
+                    onClick={() => {
+                        reset();
+                        handleSwitchLoginPageClick();
+                    }}
                 >
                     {page === 'signup' ? 'Login' : 'Sign up'}
                 </Button>

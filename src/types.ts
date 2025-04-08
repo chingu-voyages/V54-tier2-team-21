@@ -1,17 +1,15 @@
 import { z } from 'zod';
-import { inputFormSchema } from './assets/inputFormSchema';
+import { inputFormSchema, inputLoginSchema } from './assets/inputFormSchema';
 import { RefObject } from 'react';
 
 export type Inputs = z.infer<typeof inputFormSchema>;
 
-export type LoginForm = {
-    email: string;
-    password: string;
-};
+export type LoginForm = z.infer<typeof inputLoginSchema>;
 
 export type FormField = {
     name: 'persona' | 'context' | 'task' | 'output' | 'constraint';
     description: string;
+    placeholder: string;
 };
 
 export type FormComponentProps = {
@@ -30,6 +28,7 @@ export type LoginComponentProps = {
     handleLoginClick: (data: LoginForm) => void;
     handleSwitchLoginPageClick: () => void;
     page: string;
+    loginError: string;
 };
 
 export type TeamMembers = {
