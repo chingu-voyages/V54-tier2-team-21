@@ -15,6 +15,7 @@ import { capitalise } from '../utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputFormSchema } from '../assets/inputFormSchema';
 import { styles } from '../styles';
+import React from 'react';
 
 const formFields: FormField[] = [
     {
@@ -96,7 +97,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
             >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {formFields.map((field, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             <span
                                 style={{
                                     display: 'flex',
@@ -174,7 +175,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                     {errors[field.name]?.message}
                                 </Typography>
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                     <Button
                         variant="contained"
