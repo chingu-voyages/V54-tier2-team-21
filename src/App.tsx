@@ -68,15 +68,19 @@ function App() {
 
             const data = await result.json();
 
-            if (data.errors.non_field_errors) {
-                throw new Error(data.errors.non_field_errors);
+            if (data.errors) {
+                if (data.errors.non_field_errors) {
+                    throw new Error(data.errors.non_field_errors);
+                } else {
+                    throw new Error('There has been an issue');
+                }
             }
 
             setPage('');
             setIsLoggedIn(true);
 
-            setCookie('aghyt', data.access_token, 1);
-            setCookie('jkiuru', data.refresh_token, 1);
+            setCookie('token', data.access_token, 1);
+            setCookie('refresh', data.refresh_token, 1);
         } catch (error) {
             console.log(error);
             if (error instanceof Error) {
@@ -88,8 +92,8 @@ function App() {
     }
 
     function handleLogout() {
-        clearCookie('aghyt');
-        clearCookie('jkiuru');
+        clearCookie('token');
+        clearCookie('refresh');
         setIsLoggedIn(false);
     }
 
