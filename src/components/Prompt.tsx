@@ -15,6 +15,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
                 justifyContent: 'space-between',
                 ...styles.container,
                 ...styles.promptContainer,
+                textAlign: 'left',
             }}
             aria-label="Text area for displaying the 5 prompts combined"
             tabIndex={0}

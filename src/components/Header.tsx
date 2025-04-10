@@ -1,9 +1,16 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
+import { HeaderComponentProps } from '../types';
+import { getMonth, getYear } from '../utils/utils';
 
-const Header = () => {
+const Header = ({
+    handleSignupClick,
+    page,
+    isLoggedIn,
+    handleLogout,
+}: HeaderComponentProps) => {
     return (
         <Container
             component="header"
@@ -24,9 +31,28 @@ const Header = () => {
                     height: '32px',
                 }}
             />
-            <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
-                April 2025
-            </Typography>
+            <Container
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
+                    gap: 2,
+                }}
+            >
+                {page === '' && (
+                    <Button
+                        variant="contained"
+                        type="button"
+                        sx={{ ...styles.secondaryButton }}
+                        onClick={isLoggedIn ? handleLogout : handleSignupClick}
+                    >
+                        {isLoggedIn ? 'Logout' : 'Sign up'}
+                    </Button>
+                )}
+                <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
+                    {getMonth()} {getYear()}
+                </Typography>
+            </Container>
         </Container>
     );
 };
