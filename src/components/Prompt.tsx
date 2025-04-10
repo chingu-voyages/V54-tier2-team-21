@@ -13,8 +13,12 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
             sx={{
                 ...styles.flexColumn,
                 justifyContent: 'space-between',
-                ...styles.displayContainer,
+                ...styles.container,
+                ...styles.promptContainer,
+                textAlign: 'left',
             }}
+            aria-label="Text area for displaying the 5 prompts combined"
+            tabIndex={0}
         >
             {prompt ? (
                 <Typography
@@ -47,7 +51,7 @@ const Prompt = ({ prompt, onPromptSubmit }: PromptProps) => {
                     <Typography
                         sx={{ m: 2, color: styles.colors.fontSecondary }}
                     >
-                        PLEASE ENTER A PROMPT
+                        This is where the Prompt Magic Happens
                     </Typography>
                 </Box>
             )}

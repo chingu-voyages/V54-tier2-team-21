@@ -2,18 +2,31 @@ export const styles = {
     typography: {
         fontSizeExtraSmall: '8px',
         fontSizeSmall: '10px',
+        fontSizeNormal: '13px',
+        fontSizeLarge: '35px',
     },
     colors: {
         footerBackground: '#12141D',
         fontPrimary: '#FFFFFF',
         fontSecondary: '#CBC9C9',
     },
-    displayContainer: {
+    container: {
         width: '100%',
         minHeight: '250px',
-        border: '3px solid transparent',
+        borderRadius: '8px',
+        marginBottom: '4em',
+        border: '2px solid #CBC9C9',
+        backgroundColor: '#313342',
+    },
+    promptContainer: {
+        border: '2px solid transparent',
         background:
             'linear-gradient(#313342, #313342) padding-box, linear-gradient(to right, #8A00F9 0%, #FD99FF 100%) border-box',
+    },
+    loginContainer: {
+        minHeight: '250px',
+        border: '3px solid #595959',
+        backgroundColor: '#313342',
         borderRadius: '8px',
         marginBottom: '4em',
     },
@@ -33,8 +46,18 @@ export const styles = {
         alignSelf: 'center',
         borderRadius: '15px',
     },
+    secondaryButton: {
+        padding: '0.25em 1em',
+        fontSize: '0.75rem',
+        fontWeight: 600,
+        background: 'linear-gradient(to right, #8A00F9 0%, #FD99FF 100%)',
+        alignSelf: 'center',
+        borderRadius: '15px',
+    },
     textField: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#595959',
+        marginBottom: '1.5em',
+        borderRadius: '8px',
         '& label': { color: '#FFFFFF' }, // we're not displaying label currently
         '& .MuiOutlinedInput-root': {
             color: '#FFFFFF',

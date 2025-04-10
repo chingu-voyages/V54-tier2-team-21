@@ -14,9 +14,12 @@ const Result = ({ result, loading }: ResultProps) => {
         <Box
             component="section"
             sx={{
-                ...styles.displayContainer,
+                ...styles.container,
                 p: 2,
+                textAlign: 'left',
             }}
+            aria-label="Text area for displaying the result from the Gemini API"
+            tabIndex={0}
         >
             {result ? (
                 <Typography

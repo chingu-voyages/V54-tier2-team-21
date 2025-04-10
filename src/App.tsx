@@ -1,18 +1,20 @@
 import '../src/App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
 import Prompt from './components/Prompt';
 import Footer from './components/Footer';
 import { Inputs } from './types';
 import Result from './components/Result';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import Container from '@mui/material/Container';
-import { formatPrompt } from './utils/utils';
+import { formatPrompt, setCookie, clearCookie } from './utils/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import showdown from 'showdown';
 import Hero from './components/Hero';
 import HowToUse from './components/HowToUse';
+import Login from './components/Login';
+import { LoginForm } from './types';
+import { useRef } from 'react';
 
 function App() {
     const [prompt, setPrompt] = useState<string>('');
@@ -23,6 +25,18 @@ function App() {
             fontFamily: `"Poppins", sans-serif`,
         },
     });
+    const [page, setPage] = useState<string>('');
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [loginError, setLoginError] = useState<string>('');
+
+    function handleSignupClick() {
+        setPage('signup');
+    }
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleFocus = () => {
+        inputRef.current?.focus();
+    };
 
     function onFormSubmit(formData: Inputs) {
         const prompt = Object.values(formData)
@@ -31,23 +45,80 @@ function App() {
         setPrompt(prompt);
     }
 
+    function handleSwitchLoginPageClick() {
+        setPage(page === 'signup' ? 'login' : 'signup');
+        setLoginError('');
+    }
+
+    async function handleLoginClick(loginData: LoginForm) {
+        try {
+            const result = await fetch(
+                `https://v54-tier2-team-21-be.onrender.com/api/users/${page === 'signup' ? 'register' : 'login'}/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: loginData.email,
+                        password: loginData.password,
+                    }),
+                }
+            );
+
+            const data = await result.json();
+
+            if (data.errors) {
+                if (data.errors.non_field_errors) {
+                    throw new Error(data.errors.non_field_errors);
+                } else {
+                    throw new Error('There has been an issue');
+                }
+            }
+
+            setPage('');
+            setIsLoggedIn(true);
+
+            setCookie('token', data.access_token, 1);
+            setCookie('refresh', data.refresh_token, 1);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                setLoginError(error.message);
+            } else {
+                setLoginError('An unknown error occurred');
+            }
+        }
+    }
+
+    function handleLogout() {
+        clearCookie('token');
+        clearCookie('refresh');
+        setIsLoggedIn(false);
+    }
+
     async function onPromptSubmit(prompt: string) {
         setLoading(true);
         setResult('');
         try {
-            const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
-            const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({
-                model: 'gemini-2.0-flash',
-            });
+            const result = await fetch(
+                'https://v54-tier2-team-21-be.onrender.com/api/send_prompt/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt_text: prompt }),
+                }
+            );
 
-            const result = await model.generateContent(prompt);
+            const data = await result.json();
 
             const converter = new showdown.Converter();
 
-            const data = converter.makeHtml(result.response.text());
+            const convertedData = converter.makeHtml(data.api_response_text);
 
-            setResult(data);
+            setResult(convertedData);
         } catch (error) {
             console.error('Error with Gemini API:', error);
             setResult(
@@ -57,6 +128,14 @@ function App() {
         setLoading(false);
     }
 
+    useEffect(() => {
+        const token = document.cookie;
+
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <Container
@@ -65,16 +144,40 @@ function App() {
                     '@media (min-width: 0px)': {
                         maxWidth: 'sm',
                     },
+                    backgroundImage: 'url("background.png")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                 }}
             >
-                <Header />
-                <Hero />
-                <HowToUse />
-                <Container sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Form onFormSubmit={onFormSubmit} />
-                    <Prompt prompt={prompt} onPromptSubmit={onPromptSubmit} />
-                    <Result result={result} loading={loading} />
-                </Container>
+                <Header
+                    handleSignupClick={handleSignupClick}
+                    page={page}
+                    isLoggedIn={isLoggedIn}
+                    handleLogout={handleLogout}
+                />
+                {page !== '' ? (
+                    <Login
+                        handleLoginClick={handleLoginClick}
+                        handleSwitchLoginPageClick={handleSwitchLoginPageClick}
+                        page={page}
+                        loginError={loginError}
+                    />
+                ) : (
+                    <>
+                        <Hero onFocusInput={handleFocus} />
+                        <HowToUse />
+                        <Container
+                            sx={{ display: 'flex', flexDirection: 'column' }}
+                        >
+                            <Form onFormSubmit={onFormSubmit} ref={inputRef} />
+                            <Prompt
+                                prompt={prompt}
+                                onPromptSubmit={onPromptSubmit}
+                            />
+                            <Result result={result} loading={loading} />
+                        </Container>
+                    </>
+                )}
                 <Footer />
             </Container>
         </ThemeProvider>
