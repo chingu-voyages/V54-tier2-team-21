@@ -57,9 +57,7 @@ const Login = ({
                         <TextField
                             id="email"
                             variant="outlined"
-                            {...register('email', {
-                                required: true,
-                            })}
+                            {...register('email')}
                             sx={{ ...styles.textField, mb: 0 }}
                             slotProps={{
                                 input: {
@@ -90,9 +88,7 @@ const Login = ({
                             id="password"
                             variant="outlined"
                             type="password"
-                            {...register('password', {
-                                required: true,
-                            })}
+                            {...register('password')}
                             sx={{ ...styles.textField, mt: 1, mb: 0 }}
                             slotProps={{
                                 input: {
