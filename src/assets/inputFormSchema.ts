@@ -16,6 +16,6 @@ export const inputLoginSchema = z.object({
         .email({ message: 'Invalid email address' }),
     password: z
         .string()
-        .min(8, { message: 'Password must be at least 8 characters' })
+        .min(3, { message: 'Password must be at least 8 characters' })
         .max(20, { message: 'Password cannot be more than 20 characters' }),
 });
