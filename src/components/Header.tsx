@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
 import { HeaderComponentProps } from '../types';
+import { getMonth, getYear } from '../utils/utils';
 
 const Header = ({
     handleSignupClick,
@@ -49,7 +50,7 @@ const Header = ({
                     </Button>
                 )}
                 <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
-                    April 2025
+                    {getMonth()} {getYear()}
                 </Typography>
             </Container>
         </Container>
