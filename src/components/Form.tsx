@@ -155,7 +155,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                         cursor: 'pointer',
                                                         minWidth: '25px',
                                                     }}
-                                                    area-label={`Clear ${field.name} field`}
+                                                    aria-label={`Clear content in the ${field.name} field`}
                                                 >
                                                     <ClearIcon />
                                                 </Button>
