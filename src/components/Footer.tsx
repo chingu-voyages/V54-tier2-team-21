@@ -143,7 +143,7 @@ const Footer = () => {
                         spacing={1}
                         sx={{
                             textAlign: 'left',
-                            maxWidth: '260px',
+                            maxWidth: '280px',
                         }}
                     >
                         <Grid size={12}>
@@ -164,7 +164,7 @@ const Footer = () => {
                                     key={member.name}
                                     sx={{
                                         display: 'flex',
-                                        gap: '5px',
+                                        gap: '10px',
                                         alignItems: 'center',
                                     }}
                                 >
