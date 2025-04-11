@@ -1,11 +1,4 @@
-import {
-    Box,
-    Button,
-    IconButton,
-    TextField,
-    Tooltip,
-    Typography,
-} from '@mui/material';
+import { Box, Button, TextField, Tooltip, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormComponentProps, FormField, Inputs } from '../types';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -16,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { inputFormSchema } from '../assets/inputFormSchema';
 import { styles } from '../styles';
 import React from 'react';
+import InputLabel from '@mui/material/InputLabel';
 
 const formFields: FormField[] = [
     {
@@ -103,27 +97,23 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '4px',
+                                    marginBottom: '0.5em',
                                 }}
                             >
-                                <Typography
+                                <InputLabel
                                     sx={{
                                         color: styles.colors.fontPrimary,
                                     }}
+                                    htmlFor={field.name}
                                 >
                                     {capitalise(field.name)}
-                                </Typography>
+                                </InputLabel>
                                 <Tooltip
                                     title={field.description}
                                     id={field.name + 'tooltip'}
                                     role="tooltip"
                                 >
-                                    <IconButton
-                                        sx={{
-                                            color: styles.colors.fontPrimary,
-                                        }}
-                                    >
-                                        <HelpOutlineIcon />
-                                    </IconButton>
+                                    <HelpOutlineIcon tabIndex={0} />
                                 </Tooltip>
                             </span>
 
