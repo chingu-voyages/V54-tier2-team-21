@@ -94,7 +94,7 @@ const Footer = () => {
                 >
                     <Box
                         component="img"
-                        src="./public/chingu-logo.png"
+                        src="./chingu-logo.png"
                         alt="Chingu logo"
                         sx={{
                             width: '30px',
