@@ -5,10 +5,11 @@ import { styles } from '../styles';
 import { getMonth, getYear } from '../utils/utils';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
+import { HeaderComponentProps } from '../types';
 
-const Header = ({ isLoggedIn, handleLogout }) => {
+const Header = ({ isLoggedIn, handleLogout }: HeaderComponentProps) => {
     const navigate = useNavigate();
-    console.log(isLoggedIn);
+
     return (
         <Container
             component="header"
@@ -16,7 +17,7 @@ const Header = ({ isLoggedIn, handleLogout }) => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '0.75em 0.5em',
+                padding: '0.75em',
                 borderBottom: '1px solid #3A3737',
             }}
         >
@@ -34,10 +35,10 @@ const Header = ({ isLoggedIn, handleLogout }) => {
                     }}
                 />
             </RouterLink>
-            <Container
+            <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
                     gap: 1.5,
                 }}
@@ -73,7 +74,7 @@ const Header = ({ isLoggedIn, handleLogout }) => {
                 <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
                     {getMonth()} {getYear()}
                 </Typography>
-            </Container>
+            </Box>
         </Container>
     );
 };
