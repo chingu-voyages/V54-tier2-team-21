@@ -1,11 +1,16 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
-export default function AuthRequired({ isLoggedIn }) {
+export default function AuthRequired({ isLoggedIn }: { isLoggedIn: boolean }) {
+    const location = useLocation();
+
     if (!isLoggedIn) {
         return (
             <Navigate
                 to="/login"
-                state={{ message: 'You must log in first' }}
+                state={{
+                    from: location.pathname,
+                }}
+                replace
             />
         );
     }
