@@ -44,6 +44,7 @@ export const styles = {
         background: 'linear-gradient(to right, #8A00F9 0%, #FD99FF 100%)',
         alignSelf: 'center',
         borderRadius: '15px',
+        color: '#FFFFFF',
     },
     secondaryButton: {
         padding: '0.25em 0.8em',
@@ -54,6 +55,7 @@ export const styles = {
         alignSelf: 'center',
         borderRadius: '15px',
         color: '#FFFFFF',
+        lineHeight: 1.5,
     },
     textField: {
         backgroundColor: '#595959',
