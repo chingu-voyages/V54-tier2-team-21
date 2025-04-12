@@ -22,6 +22,9 @@ const Header = ({
                 borderBottom: '1px solid #3A3737',
             }}
         >
+            <Typography variant="h1" className="visually-hidden">
+                5 STAR API
+            </Typography>
             <Box
                 component="img"
                 src="/logo.png"

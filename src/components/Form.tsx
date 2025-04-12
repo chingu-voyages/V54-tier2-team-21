@@ -64,7 +64,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
     return (
         <Box component="section" sx={{ marginTop: '4em' }}>
             <Typography
-                variant="h4"
+                variant="h3"
                 sx={{
                     fontSize: styles.typography.fontSizeLarge,
                     fontWeight: 600,
@@ -110,21 +110,24 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                 </InputLabel>
                                 <Tooltip
                                     title={field.description}
-                                    id={field.name + 'tooltip'}
                                     role="tooltip"
                                 >
                                     <HelpOutlineIcon tabIndex={0} />
                                 </Tooltip>
                             </span>
+                            <span
+                                id={`${field.name}desc`}
+                                className="visually-hidden"
+                            >
+                                {field.description}
+                            </span>
 
                             <TextField
                                 key={field.name}
                                 id={field.name}
-                                aria-describedby={field.name + 'tooltip'}
+                                aria-describedby={`${field.name}desc`}
                                 variant="outlined"
-                                {...register(field.name, {
-                                    required: true,
-                                })}
+                                {...register(field.name)}
                                 error={!!errors[field.name]}
                                 sx={{ ...styles.textField }}
                                 multiline
@@ -147,7 +150,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                     }}
                                                     aria-label={`Clear content in the ${field.name} field`}
                                                 >
-                                                    <ClearIcon />
+                                                    <ClearIcon role="none" />
                                                 </Button>
                                             </InputAdornment>
                                         ),

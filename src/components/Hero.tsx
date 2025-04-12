@@ -31,7 +31,14 @@ const Hero = ({ onFocusInput }: { onFocusInput: () => void }) => {
                 }}
             >
                 Better Prompts <br /> For Better{' '}
-                <Box component="span" className="ai">
+                <Box
+                    component="span"
+                    sx={{
+                        background: 'linear-gradient(#8a00f9, #fd99ff)',
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent',
+                    }}
+                >
                     AI
                 </Box>
             </Typography>
@@ -43,7 +50,13 @@ const Hero = ({ onFocusInput }: { onFocusInput: () => void }) => {
                 </Box>
             </Typography>
             <Typography>
-                <Box component="span" className="five-stars">
+                <Box
+                    component="span"
+                    sx={{
+                        fontWeight: 'bold',
+                        color: 'white',
+                    }}
+                >
                     Five Stars
                 </Box>{' '}
                 Prompting,
@@ -54,6 +67,7 @@ const Hero = ({ onFocusInput }: { onFocusInput: () => void }) => {
                 type="button"
                 sx={{ ...styles.primaryButton, margin: '1em' }}
                 onClick={onFocusInput}
+                aria-label="Apply focus to the first pentagram field"
             >
                 Start now
             </Button>
