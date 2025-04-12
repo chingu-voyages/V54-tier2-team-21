@@ -1,3 +1,5 @@
+import { Box, Typography } from '@mui/material';
+
 const instructions = [
     {
         title: '1. Enter your ideas with 5 prompts',
@@ -15,21 +17,55 @@ const instructions = [
 
 const HowToUse = () => {
     return (
-        <>
-            <h2 className="how-to-use-title">
+        <Box component="section">
+            <Typography
+                variant="h2"
+                sx={{
+                    marginBottom: '3rem',
+                    fontSize: '2rem',
+                    fontWeight: 700,
+                }}
+            >
                 HOW TO USE <br /> 5TAR AI
-            </h2>
-            <div className="instructions-container">
+            </Typography>
+
+            <Box
+                component="section"
+                sx={{
+                    width: '80%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-around',
+                    gap: '40px',
+                    margin: 'auto',
+                }}
+            >
                 {instructions.map((instruction) => (
-                    <div className="instructions-box">
-                        <p className="instruction instruction-title">
+                    <Box
+                        component="section"
+                        sx={{
+                            backgroundColor: '#37394a',
+                            padding: '20px',
+                            textAlign: 'center',
+                            borderRadius: '5px',
+                            color: '#8a8a93',
+                            border: '1px solid #636577',
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                color: '#fff',
+                                marginBottom: '20px',
+                                fontSize: '1.2rem',
+                            }}
+                        >
                             {instruction.title}
-                        </p>
-                        <p className="instruction">{instruction.info}</p>
-                    </div>
+                        </Typography>
+                        <Typography>{instruction.info}</Typography>
+                    </Box>
                 ))}
-            </div>
-        </>
+            </Box>
+        </Box>
     );
 };
 
