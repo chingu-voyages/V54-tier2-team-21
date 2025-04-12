@@ -54,6 +54,7 @@ const Hero = ({ onFocusInput }: { onFocusInput: () => void }) => {
                 type="button"
                 sx={{ ...styles.primaryButton, margin: '1em' }}
                 onClick={onFocusInput}
+                aria-label="Apply focus to the first pentagram field"
             >
                 Start now
             </Button>
