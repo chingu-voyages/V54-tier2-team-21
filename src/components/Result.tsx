@@ -16,6 +16,7 @@ const Result = ({ result, loading }: ResultProps) => {
             sx={{
                 ...styles.container,
                 p: 2,
+                textAlign: 'left',
             }}
             aria-label="Text area for displaying the result from the Gemini API"
             tabIndex={0}
@@ -51,7 +52,7 @@ const Result = ({ result, loading }: ResultProps) => {
                     )}
                     <Box
                         component="img"
-                        src="./public/gemini-logo.png"
+                        src="/gemini-logo.png"
                         alt="Blue diamond with arched edges"
                         sx={{
                             width: '72px',

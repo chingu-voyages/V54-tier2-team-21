@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { styles } from '../styles';
 import { TeamMembers } from '../types';
 
@@ -55,12 +54,10 @@ const Footer = () => {
                 backgroundColor: styles.colors.footerBackground,
                 margin: 0,
                 color: styles.colors.fontPrimary,
-                minHeight: '280px',
                 padding: '1.5em 1.5em 0.75em 1.5em',
             }}
         >
-            <Container
-                disableGutters
+            <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -79,22 +76,18 @@ const Footer = () => {
                         marginBottom: '0.5em',
                     }}
                 />
-                <Container
-                    disableGutters
+                <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         gap: '0.1em',
-                        '@media (min-width: 0px)': {
-                            maxWidth: '135px',
-                        },
                         marginRight: 0,
                     }}
                 >
                     <Box
                         component="img"
-                        src="./public/chingu-logo.png"
+                        src="./chingu-logo.png"
                         alt="Chingu logo"
                         sx={{
                             width: '30px',
@@ -104,7 +97,7 @@ const Footer = () => {
                     />
                     <Typography
                         sx={{
-                            fontSize: styles.typography.fontSizeExtraSmall,
+                            fontSize: styles.typography.fontSizeSmall,
                             color: styles.colors.fontSecondary,
                         }}
                     >
@@ -112,24 +105,20 @@ const Footer = () => {
                     </Typography>
                     <Typography
                         sx={{
-                            fontSize: styles.typography.fontSizeExtraSmall,
+                            fontSize: styles.typography.fontSizeSmall,
                             color: styles.colors.fontSecondary,
                         }}
                     >
                         as part of the Chingu Voyage 54
                     </Typography>
-                </Container>
-            </Container>
+                </Box>
+            </Box>
             <Container
                 id="team-container"
-                maxWidth="xs"
                 disableGutters
                 sx={{
                     margin: '0',
                     padding: '0',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
                     '@media (min-width: 0px)': {
                         width: '100%',
                         maxWidth: '100%',
@@ -137,19 +126,19 @@ const Footer = () => {
                     marginBottom: '2em',
                 }}
             >
-                <Container disableGutters sx={{ textAlign: 'left' }}>
+                <Box sx={{ textAlign: 'left' }}>
                     <Grid
                         container
                         spacing={1}
                         sx={{
                             textAlign: 'left',
-                            maxWidth: '260px',
+                            maxWidth: '400px',
                         }}
                     >
                         <Grid size={12}>
                             <Typography
                                 sx={{
-                                    fontSize: styles.typography.fontSizeSmall,
+                                    fontSize: styles.typography.fontSizeNormal,
                                     fontWeight: 'bold',
                                     marginBottom: '0.5em',
                                 }}
@@ -164,77 +153,40 @@ const Footer = () => {
                                     key={member.name}
                                     sx={{
                                         display: 'flex',
-                                        gap: '5px',
+                                        gap: '18px',
                                         alignItems: 'center',
                                     }}
                                 >
-                                    <Typography
-                                        sx={{
-                                            fontSize:
-                                                styles.typography.fontSizeSmall,
-                                            color: styles.colors.fontSecondary,
-                                        }}
+                                    <Link
+                                        href={member.linkedIn}
+                                        aria-label={`LinkedIn account for ${member.name}`}
+                                        underline="none"
                                     >
-                                        {member.name}
-                                    </Typography>
-                                    {member.linkedIn && (
-                                        <Link
-                                            href={member.linkedIn}
-                                            aria-label={`LinkedIn account for ${member.name}`}
+                                        <Typography
+                                            sx={{
+                                                fontSize:
+                                                    styles.typography
+                                                        .fontSizeNormal,
+                                                color: styles.colors
+                                                    .fontSecondary,
+                                                '&:hover, &:focus': {
+                                                    fontWeight: 'bold',
+                                                },
+                                            }}
                                         >
-                                            <Typography
-                                                sx={{
-                                                    fontSize:
-                                                        styles.typography
-                                                            .fontSizeExtraSmall,
-                                                    color: styles.colors
-                                                        .fontPrimary,
-                                                }}
-                                            >
-                                                <LinkedInIcon
-                                                    sx={{
-                                                        cursor: 'pointer',
-                                                        width: '10px',
-                                                        height: '10px',
-                                                    }}
-                                                />
-                                            </Typography>
-                                        </Link>
-                                    )}
-                                    {member.gitHub && (
-                                        <Link
-                                            href={member.gitHub}
-                                            aria-label={`GitHub repository for ${member.name}`}
-                                        >
-                                            <Typography
-                                                sx={{
-                                                    fontSize:
-                                                        styles.typography
-                                                            .fontSizeExtraSmall,
-                                                    color: styles.colors
-                                                        .fontPrimary,
-                                                }}
-                                            >
-                                                <GitHubIcon
-                                                    sx={{
-                                                        cursor: 'pointer',
-                                                        width: '10px',
-                                                        height: '10px',
-                                                    }}
-                                                />
-                                            </Typography>
-                                        </Link>
-                                    )}
+                                            {member.name}
+                                        </Typography>
+                                    </Link>
                                 </Grid>
                             );
                         })}
                     </Grid>
-                </Container>
+                </Box>
             </Container>
             <Container>
                 <Typography
                     sx={{
-                        fontSize: styles.typography.fontSizeExtraSmall,
+                        fontSize: styles.typography.fontSizeSmall,
                         marginBottom: '0.5em',
                     }}
                 >
@@ -257,7 +209,7 @@ const Footer = () => {
                 <Typography
                     component="p"
                     sx={{
-                        fontSize: styles.typography.fontSizeExtraSmall,
+                        fontSize: styles.typography.fontSizeSmall,
                         marginTop: '1em',
                     }}
                 >

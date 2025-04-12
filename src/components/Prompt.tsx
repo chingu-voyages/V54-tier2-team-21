@@ -16,6 +16,7 @@ const Prompt = ({ prompt, onPromptSubmit, isPromptSubmitted }: PromptProps) => {
                 justifyContent: 'space-between',
                 ...styles.container,
                 ...styles.promptContainer,
+                textAlign: 'left',
             }}
             aria-label="Text area for displaying the 5 prompts combined"
             tabIndex={0}
@@ -41,7 +42,7 @@ const Prompt = ({ prompt, onPromptSubmit, isPromptSubmitted }: PromptProps) => {
                 >
                     <Box
                         component="img"
-                        src="./public/star-logo.png"
+                        src="/star-logo.png"
                         alt="Dark 5 pointed star with white circular background"
                         sx={{
                             width: '63px',
