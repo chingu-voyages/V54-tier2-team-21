@@ -176,6 +176,7 @@ function App() {
                             <Prompt
                                 prompt={prompt}
                                 onPromptSubmit={onPromptSubmit}
+                                isPromptSubmitted={isPromptSubmitted}
                             />
                             <Result result={result} loading={loading} />
                         </Container>
