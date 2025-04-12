@@ -47,7 +47,12 @@ function App() {
                             <Login page="login" handleLogin={handleLogin} />
                         }
                     />
-                    <Route path="register" element={<Login page="signup" />} />
+                    <Route
+                        path="register"
+                        element={
+                            <Login page="signup" handleLogin={handleLogin} />
+                        }
+                    />
 
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
                         <Route path="dashboard" element={<Dashboard />}></Route>

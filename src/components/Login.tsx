@@ -10,9 +10,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { inputLoginSchema } from '../assets/inputFormSchema';
 import { setCookie } from '../utils/utils';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
 
-const Login = ({ page, handleLogin }) => {
+const Login = ({ page, handleLogin }: LoginComponentProps) => {
     const [loginError, setLoginError] = useState<string>('');
     const {
         register,
@@ -23,6 +24,10 @@ const Login = ({ page, handleLogin }) => {
     const onSubmit: SubmitHandler<LoginForm> = (data) => handleLoginClick(data);
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const from = location.state?.from || '/';
 
     async function handleLoginClick(loginData: LoginForm) {
         try {
@@ -55,7 +60,7 @@ const Login = ({ page, handleLogin }) => {
 
             handleLogin();
 
-            navigate('/');
+            navigate(from, { replace: true });
         } catch (error) {
             console.log(error);
             if (error instanceof Error) {
@@ -191,7 +196,17 @@ const Login = ({ page, handleLogin }) => {
                         ? `Already have an account?`
                         : `Don't have an account?`}
                 </Typography>
-                <Link to={page === 'signup' ? '/login' : '/register'}>
+                <Link
+                    component={RouterLink}
+                    to={page === 'signup' ? '/login' : '/register'}
+                    sx={{
+                        color: '#FFFFFF',
+                        fontWeight: 700,
+                        display: 'inline-block',
+                        mt: 1,
+                    }}
+                    underline="none"
+                >
                     {page === 'signup' ? 'Login' : 'Sign up'}
                 </Link>
             </Box>
