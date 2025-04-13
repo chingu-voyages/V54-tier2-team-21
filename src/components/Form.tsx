@@ -112,7 +112,10 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                     title={field.description}
                                     role="tooltip"
                                 >
-                                    <HelpOutlineIcon tabIndex={0} />
+                                    <span>
+                                        {/* Use a span as a wrapper to avoid aria-hidden issue */}
+                                        <HelpOutlineIcon tabIndex={0} />
+                                    </span>
                                 </Tooltip>
                             </span>
                             <span
