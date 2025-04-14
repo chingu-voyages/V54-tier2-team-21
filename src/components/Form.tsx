@@ -160,8 +160,24 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                     sx={{
                                                         display: 'flex',
                                                         flexDirection: 'column',
+                                                        gap: 8,
                                                     }}
                                                 >
+                                                    <Button
+                                                        onClick={() =>
+                                                            clearField(field)
+                                                        }
+                                                        sx={{
+                                                            padding: '0',
+                                                            color: styles.colors
+                                                                .fontPrimary,
+                                                            cursor: 'pointer',
+                                                            minWidth: '25px',
+                                                        }}
+                                                        aria-label={`Clear content in the ${field.name} field`}
+                                                    >
+                                                        <ClearIcon role="none" />
+                                                    </Button>
                                                     {browserSupportsSpeechRecognition && (
                                                         <Button
                                                             sx={{
@@ -172,7 +188,6 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                                 cursor: 'pointer',
                                                                 minWidth:
                                                                     '25px',
-                                                                mb: 2,
                                                             }}
                                                             onTouchStart={
                                                                 handleStartListening
@@ -194,21 +209,6 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                             <MicIcon role="none" />
                                                         </Button>
                                                     )}
-                                                    <Button
-                                                        onClick={() =>
-                                                            clearField(field)
-                                                        }
-                                                        sx={{
-                                                            padding: '0',
-                                                            color: styles.colors
-                                                                .fontPrimary,
-                                                            cursor: 'pointer',
-                                                            minWidth: '25px',
-                                                        }}
-                                                        aria-label={`Clear content in the ${field.name} field`}
-                                                    >
-                                                        <ClearIcon role="none" />
-                                                    </Button>
                                                 </Box>
                                             </InputAdornment>
                                         ),
