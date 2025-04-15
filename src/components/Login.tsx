@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputLoginSchema } from '../assets/inputFormSchema';
 import { setCookie } from '../utils/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 
@@ -18,6 +18,7 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<LoginForm>({ resolver: zodResolver(inputLoginSchema) });
 
@@ -71,6 +72,10 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
         }
     }
 
+    useEffect(() => {
+        reset();
+    }, [location.pathname, reset]);
+
     return (
         <>
             <Typography
@@ -101,11 +106,20 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
                             minHeight: '400px',
                         }}
                     >
+                        {errors['email'] && (
+                            <Typography
+                                color="error"
+                                variant="caption"
+                                sx={styles.errors}
+                            >
+                                {errors['email']?.message}
+                            </Typography>
+                        )}
                         <TextField
                             id="email"
                             variant="outlined"
                             {...register('email')}
-                            sx={{ ...styles.textField, mb: 0 }}
+                            sx={{ ...styles.textField, mb: 1 }}
                             slotProps={{
                                 input: {
                                     placeholder: 'Email',
@@ -122,13 +136,13 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
                             }}
                             error={!!errors['email']}
                         />
-                        {errors['email'] && (
+                        {errors['password'] && (
                             <Typography
                                 color="error"
                                 variant="caption"
-                                sx={{ ml: 1, textAlign: 'left' }}
+                                sx={styles.errors}
                             >
-                                {errors['email']?.message}
+                                {errors['password']?.message}
                             </Typography>
                         )}
                         <TextField
@@ -136,7 +150,7 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
                             variant="outlined"
                             type="password"
                             {...register('password')}
-                            sx={{ ...styles.textField, mt: 1, mb: 0 }}
+                            sx={{ ...styles.textField, mb: 0 }}
                             slotProps={{
                                 input: {
                                     placeholder:
@@ -156,24 +170,11 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
                             }}
                             error={!!errors['email']}
                         />
-                        {errors['password'] && (
-                            <Typography
-                                color="error"
-                                variant="caption"
-                                sx={{ ml: 1, textAlign: 'left' }}
-                            >
-                                {errors['password']?.message}
-                            </Typography>
-                        )}
                         {loginError && (
                             <Typography
                                 color="error"
                                 variant="caption"
-                                sx={{
-                                    ml: 1,
-                                    textAlign: 'left',
-                                    fontSize: '.9rem',
-                                }}
+                                sx={styles.errors}
                             >
                                 {loginError}
                             </Typography>

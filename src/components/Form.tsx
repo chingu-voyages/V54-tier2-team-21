@@ -134,6 +134,18 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                     <HelpOutlineIcon tabIndex={0} />
                                 </Tooltip>
                             </span>
+                            {errors[field.name] && (
+                                <Typography
+                                    color="error"
+                                    variant="caption"
+                                    sx={{
+                                        ...styles.errors,
+                                        mb: 1,
+                                    }}
+                                >
+                                    {errors[field.name]?.message}
+                                </Typography>
+                            )}
                             <span
                                 id={`${field.name}desc`}
                                 className="visually-hidden"
@@ -180,6 +192,7 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                     </Button>
                                                     {browserSupportsSpeechRecognition && (
                                                         <Button
+                                                            aria-label={`Hold down button and dictate what you want to put into the ${field.name} field`}
                                                             sx={{
                                                                 padding: '0',
                                                                 color: styles
@@ -217,15 +230,6 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                 inputRef={index === 0 ? ref : null}
                                 tabIndex={0}
                             />
-                            {errors[field.name] && (
-                                <Typography
-                                    color="error"
-                                    variant="caption"
-                                    sx={{ ml: 2 }}
-                                >
-                                    {errors[field.name]?.message}
-                                </Typography>
-                            )}
                         </React.Fragment>
                     ))}
                     <Button
