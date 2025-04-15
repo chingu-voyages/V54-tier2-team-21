@@ -70,4 +70,8 @@ export const styles = {
             '&.Mui-focused fieldset': { borderColor: 'lightgray' },
         },
     },
+    errors: {
+        fontSize: '.9rem',
+        textAlign: 'left',
+    },
 };

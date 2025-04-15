@@ -10,6 +10,10 @@ import { inputFormSchema } from '../assets/inputFormSchema';
 import { styles } from '../styles';
 import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
+import SpeechRecognition, {
+    useSpeechRecognition,
+} from 'react-speech-recognition';
+import MicIcon from '@mui/icons-material/Mic';
 
 const formFields: FormField[] = [
     {
@@ -60,6 +64,21 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
         setValue(field.name, '');
         document.getElementById(field.name)?.focus();
     };
+
+    const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
+        useSpeechRecognition();
+
+    function handleStartListening() {
+        resetTranscript();
+        SpeechRecognition.startListening({ continuous: true });
+    }
+
+    function handleStopListening(
+        fieldName: 'persona' | 'context' | 'task' | 'output' | 'constraint'
+    ) {
+        SpeechRecognition.stopListening();
+        setValue(fieldName, transcript);
+    }
 
     return (
         <Box component="section" sx={{ marginTop: '4em' }}>
@@ -118,6 +137,18 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                     </span>
                                 </Tooltip>
                             </span>
+                            {errors[field.name] && (
+                                <Typography
+                                    color="error"
+                                    variant="caption"
+                                    sx={{
+                                        ...styles.errors,
+                                        mb: 1,
+                                    }}
+                                >
+                                    {errors[field.name]?.message}
+                                </Typography>
+                            )}
                             <span
                                 id={`${field.name}desc`}
                                 className="visually-hidden"
@@ -140,21 +171,61 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                         placeholder: field.placeholder,
                                         endAdornment: (
                                             <InputAdornment position="end">
-                                                <Button
-                                                    onClick={() =>
-                                                        clearField(field)
-                                                    }
+                                                <Box
                                                     sx={{
-                                                        padding: '0',
-                                                        color: styles.colors
-                                                            .fontPrimary,
-                                                        cursor: 'pointer',
-                                                        minWidth: '25px',
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        gap: 8,
                                                     }}
-                                                    aria-label={`Clear content in the ${field.name} field`}
                                                 >
-                                                    <ClearIcon role="none" />
-                                                </Button>
+                                                    <Button
+                                                        onClick={() =>
+                                                            clearField(field)
+                                                        }
+                                                        sx={{
+                                                            padding: '0',
+                                                            color: styles.colors
+                                                                .fontPrimary,
+                                                            cursor: 'pointer',
+                                                            minWidth: '25px',
+                                                        }}
+                                                        aria-label={`Clear content in the ${field.name} field`}
+                                                    >
+                                                        <ClearIcon role="none" />
+                                                    </Button>
+                                                    {browserSupportsSpeechRecognition && (
+                                                        <Button
+                                                            aria-label={`Hold down button and dictate what you want to put into the ${field.name} field`}
+                                                            sx={{
+                                                                padding: '0',
+                                                                color: styles
+                                                                    .colors
+                                                                    .fontPrimary,
+                                                                cursor: 'pointer',
+                                                                minWidth:
+                                                                    '25px',
+                                                            }}
+                                                            onTouchStart={
+                                                                handleStartListening
+                                                            }
+                                                            onMouseDown={
+                                                                handleStartListening
+                                                            }
+                                                            onTouchEnd={() => {
+                                                                handleStopListening(
+                                                                    field.name
+                                                                );
+                                                            }}
+                                                            onMouseUp={() => {
+                                                                handleStopListening(
+                                                                    field.name
+                                                                );
+                                                            }}
+                                                        >
+                                                            <MicIcon role="none" />
+                                                        </Button>
+                                                    )}
+                                                </Box>
                                             </InputAdornment>
                                         ),
                                     },
@@ -162,15 +233,6 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                 inputRef={index === 0 ? ref : null}
                                 tabIndex={0}
                             />
-                            {errors[field.name] && (
-                                <Typography
-                                    color="error"
-                                    variant="caption"
-                                    sx={{ ml: 2 }}
-                                >
-                                    {errors[field.name]?.message}
-                                </Typography>
-                            )}
                         </React.Fragment>
                     ))}
                     <Button
