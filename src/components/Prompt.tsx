@@ -42,11 +42,12 @@ const Prompt = ({ prompt, onPromptSubmit, isPromptSubmitted }: PromptProps) => {
                 >
                     <Box
                         component="img"
-                        src="/star-logo.png"
+                        src="/logo-icon.png"
                         alt="Dark 5 pointed star with white circular background"
                         sx={{
-                            width: '63px',
-                            height: '63px',
+                            width: '50px',
+                            height: '50px',
+                            opacity: 0.25, // 25% opacity
                         }}
                     />
                     <Typography
