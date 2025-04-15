@@ -33,7 +33,7 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
     async function handleLoginClick(loginData: LoginForm) {
         try {
             const result = await fetch(
-                `https://v54-tier2-team-21-be.onrender.com/api/users/${page === 'signup' ? 'register' : 'login'}/`,
+                `https://denys7906.pythonanywhere.com/api/users/${page === 'signup' ? 'register' : 'login'}/`,
                 {
                     method: 'POST',
                     headers: {
