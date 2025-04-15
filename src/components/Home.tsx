@@ -36,7 +36,7 @@ function Home() {
         setIsPromptSubmitted(true);
         try {
             const result = await fetch(
-                'https://v54-tier2-team-21-be.onrender.com/api/send_prompt/',
+                'https://denys7906.pythonanywhere.com/api/send_prompt/',
                 {
                     method: 'POST',
                     headers: {
