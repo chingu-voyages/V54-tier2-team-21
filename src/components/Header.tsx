@@ -2,15 +2,14 @@ import { Typography, Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { styles } from '../styles';
-import { HeaderComponentProps } from '../types';
 import { getMonth, getYear } from '../utils/utils';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
+import { HeaderComponentProps } from '../types';
 
-const Header = ({
-    handleSignupClick,
-    page,
-    isLoggedIn,
-    handleLogout,
-}: HeaderComponentProps) => {
+const Header = ({ isLoggedIn, handleLogout }: HeaderComponentProps) => {
+    const navigate = useNavigate();
+
     return (
         <Container
             component="header"
@@ -25,37 +24,57 @@ const Header = ({
             <Typography variant="h1" className="visually-hidden">
                 5 STAR API
             </Typography>
+            <RouterLink to="/">
+                <Box
+                    component="img"
+                    src="/logo.png"
+                    alt="Five star api logo"
+                    sx={{
+                        width: '95px',
+                        height: '32px',
+                    }}
+                />
+            </RouterLink>
             <Box
-                component="img"
-                src="/logo.png"
-                alt="Five star api logo"
-                sx={{
-                    width: '95px',
-                    height: '32px',
-                }}
-            />
-            <Container
                 sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 1.5,
                 }}
             >
-                {page === '' && (
+                <Link
+                    component={RouterLink}
+                    to="dashboard"
+                    sx={styles.secondaryButton}
+                    underline="none"
+                >
+                    DASHBOARD
+                </Link>
+                {isLoggedIn ? (
                     <Button
-                        variant="contained"
-                        type="button"
-                        sx={{ ...styles.secondaryButton }}
-                        onClick={isLoggedIn ? handleLogout : handleSignupClick}
+                        onClick={() => {
+                            handleLogout();
+                            navigate('/');
+                        }}
+                        sx={styles.secondaryButton}
                     >
-                        {isLoggedIn ? 'Logout' : 'Sign up'}
+                        LOG OUT
                     </Button>
+                ) : (
+                    <Link
+                        component={RouterLink}
+                        to="register"
+                        sx={styles.secondaryButton}
+                        underline="none"
+                    >
+                        SIGN UP
+                    </Link>
                 )}
                 <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
                     {getMonth()} {getYear()}
                 </Typography>
-            </Container>
+            </Box>
         </Container>
     );
 };

@@ -8,21 +8,68 @@ import LockIcon from '@mui/icons-material/Lock';
 import InputAdornment from '@mui/material/InputAdornment';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputLoginSchema } from '../assets/inputFormSchema';
+import { setCookie } from '../utils/utils';
+import { useState } from 'react';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
 
-const Login = ({
-    handleLoginClick,
-    handleSwitchLoginPageClick,
-    page,
-    loginError,
-}: LoginComponentProps) => {
+const Login = ({ page, handleLogin }: LoginComponentProps) => {
+    const [loginError, setLoginError] = useState<string>('');
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors },
     } = useForm<LoginForm>({ resolver: zodResolver(inputLoginSchema) });
 
     const onSubmit: SubmitHandler<LoginForm> = (data) => handleLoginClick(data);
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const from = location.state?.from || '/';
+
+    async function handleLoginClick(loginData: LoginForm) {
+        try {
+            const result = await fetch(
+                `https://v54-tier2-team-21-be.onrender.com/api/users/${page === 'signup' ? 'register' : 'login'}/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: loginData.email,
+                        password: loginData.password,
+                    }),
+                }
+            );
+
+            const data = await result.json();
+
+            if (data.errors) {
+                if (data.errors.non_field_errors) {
+                    throw new Error(data.errors.non_field_errors);
+                } else {
+                    throw new Error('There has been an issue');
+                }
+            }
+
+            setCookie('token', data.access_token, 1);
+            setCookie('refresh', data.refresh_token, 1);
+
+            handleLogin();
+
+            navigate(from, { replace: true });
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                setLoginError(error.message);
+            } else {
+                setLoginError('An unknown error occurred');
+            }
+        }
+    }
 
     return (
         <>
@@ -149,22 +196,19 @@ const Login = ({
                         ? `Already have an account?`
                         : `Don't have an account?`}
                 </Typography>
-                <Button
-                    variant="text"
+                <Link
+                    component={RouterLink}
+                    to={page === 'signup' ? '/login' : '/register'}
                     sx={{
-                        textTransform: 'none',
-                        padding: 0,
-                        color: styles.colors.fontPrimary,
+                        color: '#FFFFFF',
                         fontWeight: 700,
-                        fontSize: '1rem',
+                        display: 'inline-block',
+                        mt: 1,
                     }}
-                    onClick={() => {
-                        reset();
-                        handleSwitchLoginPageClick();
-                    }}
+                    underline="none"
                 >
                     {page === 'signup' ? 'Login' : 'Sign up'}
-                </Button>
+                </Link>
             </Box>
         </>
     );
