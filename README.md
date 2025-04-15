@@ -147,7 +147,7 @@ Voyage 54 - team 21. April 2025
 - Mark O'Brien - FE Developer: [GitHub](https://github.com/thenotoriousob)
 - Andreea Tohatan - Scrum Master: [GitHub](https://github.com/Andreea-A-T) / [LinkedIn](https://linkedin.com/in/andreea-anamaria-tohatan/)
 - Niamh Brown - FE Developer: [GitHub](https://github.com/NiamhBrown) / [LinkedIn](https://www.linkedin.com/in/niamh-brown1/)
-- Yusuf Mohsen - Designer: [GitHub](https://github.com/yusufmohsiin) / [LinkedIn](https://www.linkedin.com/in/yusuf-mohsiin/)
+- Yusuf Mohsen - Product Designer: [GitHub](https://github.com/yusufmohsiin) / [LinkedIn](https://www.linkedin.com/in/yusuf-mohsiin/)
 - Denys Melnyk - BE Developer: [GitHub](https://github.com/TheDrakl) / [LinkedIn](https://www.linkedin.com/in/denys-melnyk7/)
 - Estelle Couture - Product Owner: [GitHub](https://github.com/Escargotte) / [LinkedIn](https://www.linkedin.com/in/estelle-couture-41422b47/)
 - Adil Rahman - FE Developer: [GitHub](https://github.com/adil-rahman1) / [LinkedIn](https://www.linkedin.com/in/adil-rahman1/)
