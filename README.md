@@ -1,6 +1,11 @@
-# Five Star API
+# 5TAR.ai ⭐
+![logo-with-text-192@ light3x](https://github.com/user-attachments/assets/99dcca95-cb5f-4a90-8175-ad835cedfc79)
+
 
 # 🔗 [Live preview](https://5starai.netlify.app/)
+
+# Mobile V 1.0
+![hero section](https://github.com/user-attachments/assets/a983de40-104d-49f6-9ae4-661e9855ccd7)
 
 ---
 
@@ -140,7 +145,7 @@ Notice: For running this app locally, you will need .env keys to connect to the 
 
 ---
 
-## Team
+## Team 👨‍💻 👨‍💻
 
 Voyage 54 - team 21. April 2025
 
