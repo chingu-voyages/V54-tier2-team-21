@@ -24,13 +24,27 @@
 
 ## About Project
 
+5 Star AI is a mobile web app designed to help on-the-go users to build high quality prompts using a structured methodology: the Pentagram.
+
+Our product will empower users to craft more effective, 5-star quality prompts and improve Gemini results.
+
 ---
 
 ## Features
 
+- **Dictate your prompt:** Use your microphone to enter prompts so you can do it on the go
+
+- **Create an account:** Create an account with us and view previous prompts or export the to pdf
+
 ---
 
 ## How it works
+
+Use the pentagram methodology to build better prompts. Combine data for your Persona, Context, Task, Output and Contraint to build a better
+prompt to send to the Gemini API. It will them display a formatted response from Gemini. You have the option of using audio dictation
+for filling out these fields.
+
+Log in to save prompts and view all of your previous prompts and export them to pdf.
 
 ---
 
