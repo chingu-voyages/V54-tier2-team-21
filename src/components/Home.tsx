@@ -10,7 +10,7 @@ import { useState, useRef } from 'react';
 import { Inputs } from '../types';
 import { formatPrompt } from '../utils/utils';
 
-function Home() {
+function Home({ token }: { token: string }) {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -41,6 +41,7 @@ function Home() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        ...(token && { Authorization: `Bearer ${token}` }),
                     },
                     body: JSON.stringify({ prompt_text: prompt }),
                 }

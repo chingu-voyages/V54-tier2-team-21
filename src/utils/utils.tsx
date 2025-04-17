@@ -20,6 +20,19 @@ function clearCookie(name: string) {
     document.cookie = `${name}=;  path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; Secure; SameSite=Strict`;
 }
 
+function getCookie(name: string) {
+    const cookies = document.cookie.split(';');
+    const cookieName = `${name}=`;
+
+    for (const cookie of cookies) {
+        if (cookie.startsWith(cookieName)) {
+            return cookie.substring(cookieName.length);
+        }
+    }
+
+    return '';
+}
+
 function getMonth() {
     const dateObj = new Date();
     const months = [
@@ -44,4 +57,12 @@ function getYear() {
     return dateObj.getFullYear();
 }
 
-export { formatPrompt, capitalise, setCookie, clearCookie, getMonth, getYear };
+export {
+    formatPrompt,
+    capitalise,
+    setCookie,
+    clearCookie,
+    getMonth,
+    getYear,
+    getCookie,
+};

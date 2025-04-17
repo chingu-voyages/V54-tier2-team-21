@@ -30,6 +30,7 @@ export type LoginComponentProps = {
 export type LayoutComponentProps = {
     isLoggedIn: boolean;
     handleLogout: () => void;
+    token: string;
 };
 
 export type TeamMembers = {
