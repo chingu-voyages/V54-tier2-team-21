@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Token } from '../types';
 
-const Dashboard = ({ token }: { token: string }) => {
+const Dashboard = ({ token }: Token) => {
     const [previousPrompts, setPreviousPrompts] = useState([{}]);
 
     async function getPreviousPrompts() {

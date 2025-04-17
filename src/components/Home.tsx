@@ -7,10 +7,10 @@ import Hero from './Hero';
 import HowToUse from './HowToUse';
 import showdown from 'showdown';
 import { useState, useRef } from 'react';
-import { Inputs } from '../types';
+import { Inputs, Token } from '../types';
 import { formatPrompt } from '../utils/utils';
 
-function Home({ token }: { token: string }) {
+function Home({ token }: Token) {
     const [prompt, setPrompt] = useState<string>('');
     const [result, setResult] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);

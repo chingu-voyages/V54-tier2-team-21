@@ -38,3 +38,12 @@ export type TeamMembers = {
     linkedIn?: string;
     gitHub: string;
 };
+
+export type FieldName =
+    | 'persona'
+    | 'context'
+    | 'task'
+    | 'output'
+    | 'constraint';
+
+export type Token = { token: string };
