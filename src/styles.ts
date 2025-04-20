@@ -10,7 +10,6 @@ export const styles = {
         fontSecondary: '#CBC9C9',
     },
     container: {
-        width: '100%',
         minHeight: '250px',
         borderRadius: '8px',
         marginBottom: '4em',
