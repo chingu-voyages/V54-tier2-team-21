@@ -66,6 +66,14 @@ Log in to save prompts and view all of your previous prompts and export them to 
 
 - **MUI:** for all styling, custom classes...
 
+- **Django** for handling server-side logic, routing, database interaction
+
+- **Django Rest Framework** for building RESTful API
+
+- **PostgreSQL** for storing user data, prompts
+
+- **SimpleJWT** for authentication using JSON Web Tokens
+
 <br>
 
 **dependencies:**
@@ -105,6 +113,40 @@ Log in to save prompts and view all of your previous prompts and export them to 
 - "typescript-eslint": "^8.24.1",
 - "vite": "^6.2.0",
 - "vitest": "^3.0.9"
+
+**Backend dependencies:**
+
+- asgiref==3.8.1
+- Brotli==1.1.0
+- certifi==2025.1.31
+- cffi==1.17.1
+- chardet==5.2.0
+- charset-normalizer==3.4.1
+- cssselect2==0.8.0
+- Django==5.1.7
+- django-cors-headers==4.7.0
+- djangorestframework==3.15.2
+- djangorestframework_simplejwt==5.5.0
+- fonttools==4.57.0
+- gunicorn==23.0.0
+- idna==3.10
+- packaging==24.2
+- pillow==11.1.0
+- psycopg2-binary==2.9.10
+- pycparser==2.22
+- pydyf==0.11.0
+- PyJWT==2.9.0
+- pyphen==0.17.2
+- python-dotenv==1.1.0
+- reportlab==4.3.1
+- requests==2.32.3
+- sqlparse==0.5.3
+- tinycss2==1.4.0
+- tinyhtml5==2.0.0
+- urllib3==2.3.0
+- weasyprint==65.0
+- webencodings==0.5.1
+- zopfli==0.2.3.post1
 
 ---
 
@@ -156,6 +198,59 @@ Notice: For running this app locally, you will need .env keys to connect to the 
 7. **Start the Project:**
 
     - Run the command: `npm run dev` or `yarn dev` to start the project. You will need to manually open the browser address at [localhost:5173/](http://localhost:5173/)
+
+---
+
+## Backend Setup
+
+1. **Clone the Repository:**
+
+    - Open your terminal and run: `git clone https://github.com/chingu-voyages/v54-tier2-team-21-be`
+
+2. **Navigate to the Backend Directory:**
+
+    - Run the command: `cd v54-tier2-team-21-be`
+
+3. **Create environment and install Dependencies:**
+
+    - Run the command to create a virtual environment: `python3 -m venv env`
+  
+    - Activate the virtual environment:
+       - On macOs/Linux: `source env/bin/activate`
+       - On Windows: `env\script\activate`
+  
+    - Navigate to the ai_backend directory: `cd ai_backend`
+  
+    - Install dependencies: `pip install -r  requirements.txt`
+
+4. **Create .env and fill in the data**
+
+   - Create .env file in the root of the ai_backend folder.
+  
+   - Add the following configuration to you .env file:
+<pre><code class="language-env">SECRET_KEY=your-secret-key
+DEBUG=1
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+DB_NAME=your-database-name
+DB_USER=your-database-user
+DB_PASSWORD=your-database-password
+DB_HOST=your-database-host
+DB_PORT=5432
+
+API_KEY=your-api-key-for-geminiAPI
+
+EMAIL_HOST_USER=your-email-user
+EMAIL_HOST_PASSWORD=your-email-password
+EMAIL_HOST=your-email-host</code></pre>
+
+
+   Replace placeholders values with your actual data
+
+6. **Run migrations and start the server**
+   - Run the database migrations: `python manage.py migrate`
+  
+   - Start the development server: `python manage.py runserver`
 
 ---
 
