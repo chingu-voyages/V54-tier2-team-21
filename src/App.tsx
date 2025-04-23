@@ -8,9 +8,13 @@ import { clearCookie, getCookie } from './utils/utils';
 import { useState, useEffect } from 'react';
 import PromptViewer from './components/PromptViewer';
 import { PreviousPrompts } from './types';
+import Container from '@mui/material/Container';
+import ProgressIndicator from './components/ProgressIndicator';
+import { styles } from './styles';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isAuthChecked, setIsAuthChecked] = useState(false);
     const [token, setToken] = useState({ token: '', refresh: '' });
     const [previousPrompts, setPreviousPrompts] = useState<PreviousPrompts>();
 
@@ -26,6 +30,7 @@ function App() {
             setToken({ token: cookieToken, refresh: cookieRefreshToken });
             setIsLoggedIn(true);
         }
+        setIsAuthChecked(true);
     }
 
     function handleLogin() {
@@ -43,7 +48,7 @@ function App() {
         setPreviousPrompts(previousPrompts);
     }
 
-    return (
+    return isAuthChecked ? (
         <BrowserRouter>
             <Routes>
                 <Route
@@ -95,6 +100,16 @@ function App() {
                 </Route>
             </Routes>
         </BrowserRouter>
+    ) : (
+        <Container
+            sx={{
+                display: styles.flexRow,
+                justifyContent: 'center',
+                marginBottom: '1em',
+            }}
+        >
+            <ProgressIndicator />
+        </Container>
     );
 }
 
