@@ -1,3 +1,5 @@
+import showdown from 'showdown';
+
 const capitalise = (str: string) => str[0].toUpperCase() + str.slice(1);
 
 const formatPrompt = (prompt: string) => {
@@ -57,6 +59,14 @@ function getYear() {
     return dateObj.getFullYear();
 }
 
+function convertResult(response: string) {
+    const converter = new showdown.Converter();
+
+    const convertedResult = converter.makeHtml(response);
+
+    return convertedResult;
+}
+
 export {
     formatPrompt,
     capitalise,
@@ -65,4 +75,5 @@ export {
     getMonth,
     getYear,
     getCookie,
+    convertResult,
 };

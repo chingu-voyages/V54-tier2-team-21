@@ -5,7 +5,7 @@ import Result from './Result';
 import Container from '@mui/material/Container';
 import Hero from './Hero';
 import HowToUse from './HowToUse';
-import showdown from 'showdown';
+import { convertResult } from '../utils/utils';
 import { useState, useRef } from 'react';
 import { Inputs, Token } from '../types';
 import { formatPrompt } from '../utils/utils';
@@ -41,7 +41,9 @@ function Home({ token }: Token) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        ...(token && { Authorization: `Bearer ${token}` }),
+                        ...(token.token && {
+                            Authorization: `Bearer ${token.token}`,
+                        }),
                     },
                     body: JSON.stringify({ prompt_text: prompt }),
                 }
@@ -49,9 +51,7 @@ function Home({ token }: Token) {
 
             const data = await result.json();
 
-            const converter = new showdown.Converter();
-
-            const convertedData = converter.makeHtml(data.api_response_text);
+            const convertedData = convertResult(data.api_response_text);
 
             setResult(convertedData);
         } catch (error) {

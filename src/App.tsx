@@ -6,10 +6,13 @@ import AuthRequired from './components/AuthRequired';
 import Dashboard from './components/Dashboard';
 import { clearCookie, getCookie } from './utils/utils';
 import { useState, useEffect } from 'react';
+import PromptViewer from './components/PromptViewer';
+import { PreviousPrompts } from './types';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [token, setToken] = useState<string>('');
+    const [token, setToken] = useState({ token: '', refresh: '' });
+    const [previousPrompts, setPreviousPrompts] = useState<PreviousPrompts>();
 
     // This is if the user refreshes the page
     useEffect(() => {
@@ -18,10 +21,9 @@ function App() {
 
     function getToken() {
         const cookieToken = getCookie('token');
-
+        const cookieRefreshToken = getCookie('refresh');
         if (cookieToken) {
-            setToken(cookieToken);
-
+            setToken({ token: cookieToken, refresh: cookieRefreshToken });
             setIsLoggedIn(true);
         }
     }
@@ -34,7 +36,11 @@ function App() {
         clearCookie('token');
         clearCookie('refresh');
         setIsLoggedIn(false);
-        setToken('');
+        setToken({ token: '', refresh: '' });
+    }
+
+    function handlePreviousPrompts(previousPrompts: PreviousPrompts) {
+        setPreviousPrompts(previousPrompts);
     }
 
     return (
@@ -67,8 +73,24 @@ function App() {
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
                         <Route
                             path="dashboard"
-                            element={<Dashboard token={token} />}
+                            element={
+                                <Dashboard
+                                    token={token}
+                                    handlePreviousPrompts={
+                                        handlePreviousPrompts
+                                    }
+                                    previousPrompts={previousPrompts}
+                                />
+                            }
                         ></Route>
+                        <Route
+                            path="prompt/:id"
+                            element={
+                                <PromptViewer
+                                    previousPrompts={previousPrompts}
+                                />
+                            }
+                        />
                     </Route>
                 </Route>
             </Routes>
