@@ -94,9 +94,6 @@ const Dashboard = ({
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token.token}`,
                     },
-                    body: JSON.stringify({
-                        email: 'mark.obrien78@btinternet.com',
-                    }),
                 }
             );
 
