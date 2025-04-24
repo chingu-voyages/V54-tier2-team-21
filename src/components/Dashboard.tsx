@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { styles } from '../styles';
 import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
-import PageviewIcon from '@mui/icons-material/Pageview';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import React from 'react';
@@ -131,80 +130,80 @@ const Dashboard = ({
     return (
         <Container
             sx={{
-                minHeight: '400px',
+                minHeight: '600px',
                 padding: 1,
             }}
         >
+            <Box
+                sx={{
+                    border: '1px solid #595959',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    mb: 4,
+                    pb: 2,
+                    overflow: 'clip',
+                }}
+            >
+                <Box
+                    sx={{
+                        backgroundColor: '#292C42',
+                        textAlign: 'left',
+                        p: 1,
+                    }}
+                >
+                    <Typography
+                        variant="h2"
+                        sx={{ fontSize: '1rem', fontWeight: 700, mb: 1 }}
+                    >
+                        Dashboard
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: '0.85rem',
+                            fontWeight: 300,
+                        }}
+                    >
+                        Welcome to your{' '}
+                        <Box component="span" sx={{ fontWeight: 700 }}>
+                            5TAR.ai
+                        </Box>{' '}
+                        history
+                    </Typography>
+                </Box>
+                <Box
+                    component="img"
+                    src="/ultraviolet-star.png"
+                    alt="Ultraviolet star"
+                    sx={{
+                        width: 100,
+                        height: 100,
+                        margin: '1em auto',
+                    }}
+                />
+                <Box>
+                    <Typography
+                        sx={{
+                            fontSize: '0.85rem',
+                            fontWeight: 300,
+                        }}
+                    >
+                        Download your 5-star prompt & result
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: '0.85rem',
+                            fontWeight: 300,
+                        }}
+                    >
+                        as a PDF or send it by e-mail
+                    </Typography>
+                </Box>
+            </Box>
             {previousPrompts.length > 0 ? (
                 previousPrompts.map((prompt, index) => {
                     return (
                         <React.Fragment key={index}>
-                            <Box
-                                sx={{
-                                    border: '1px solid #595959',
-                                    borderRadius: '8px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    mb: 4,
-                                    pb: 2,
-                                    overflow: 'clip',
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        backgroundColor: '#292C42',
-                                        textAlign: 'left',
-                                        p: 1,
-                                    }}
-                                >
-                                    <Typography sx={{ fontWeight: 700, mb: 1 }}>
-                                        Dashboard
-                                    </Typography>
-                                    <Typography
-                                        sx={{
-                                            fontSize: '0.85rem',
-                                            fontWeight: 300,
-                                        }}
-                                    >
-                                        Welcome to your{' '}
-                                        <Box
-                                            component="span"
-                                            sx={{ fontWeight: 700 }}
-                                        >
-                                            5TAR.ai
-                                        </Box>{' '}
-                                        history
-                                    </Typography>
-                                </Box>
-                                <Box
-                                    component="img"
-                                    src="/ultraviolet-star.png"
-                                    alt="Ultraviolet star"
-                                    sx={{
-                                        width: 100,
-                                        height: 100,
-                                        margin: '1em auto',
-                                    }}
-                                />
-                                <Box>
-                                    <Typography
-                                        sx={{
-                                            fontSize: '0.85rem',
-                                            fontWeight: 300,
-                                        }}
-                                    >
-                                        Download your 5-star prompt & result
-                                    </Typography>
-                                    <Typography
-                                        sx={{
-                                            fontSize: '0.85rem',
-                                            fontWeight: 300,
-                                        }}
-                                    >
-                                        as a PDF or send it by e-mail
-                                    </Typography>
-                                </Box>
-                            </Box>
                             {emailSent && (
                                 <Typography
                                     sx={{
@@ -312,8 +311,8 @@ const Dashboard = ({
                     );
                 })
             ) : (
-                <Typography variant="h4">
-                    You are now in the dashboard
+                <Typography variant="h3" sx={{ fontSize: '1.5rem' }}>
+                    No saved prompts yet
                 </Typography>
             )}
         </Container>
