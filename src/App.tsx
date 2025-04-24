@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import AuthRequired from './components/AuthRequired';
 import Dashboard from './components/Dashboard';
+import NotFound from './components/NotFound';
 import { clearCookie, getCookie } from './utils/utils';
 import { useState, useEffect } from 'react';
 import PromptViewer from './components/PromptViewer';
@@ -97,6 +98,8 @@ function App() {
                             }
                         />
                     </Route>
+
+                    <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>
@@ -105,7 +108,7 @@ function App() {
             sx={{
                 display: styles.flexRow,
                 justifyContent: 'center',
-                marginBottom: '1em',
+                marginTop: '3em',
             }}
         >
             <ProgressIndicator />
