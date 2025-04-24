@@ -85,7 +85,7 @@ function App() {
                                     handlePreviousPrompts={
                                         handlePreviousPrompts
                                     }
-                                    previousPrompts={previousPrompts}
+                                    previousPrompts={previousPrompts ?? []}
                                 />
                             }
                         ></Route>
@@ -93,7 +93,7 @@ function App() {
                             path="prompt/:id"
                             element={
                                 <PromptViewer
-                                    previousPrompts={previousPrompts}
+                                    previousPrompts={previousPrompts ?? []}
                                 />
                             }
                         />
