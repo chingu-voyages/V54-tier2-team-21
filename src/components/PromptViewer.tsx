@@ -1,13 +1,13 @@
 import { Box, Typography, Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { PreviousPrompt as Prompt, PreviousPrompts } from '../types';
+import { PreviousPrompt, PromptViewerComponentProps } from '../types';
 import { convertResult } from '../utils/utils';
 
-const PreviousPrompt = ({ previousPrompts }: PreviousPrompts) => {
+const PromptViewer = ({ previousPrompts }: PromptViewerComponentProps) => {
     const { id } = useParams();
 
     const prompt = previousPrompts.find(
-        (prevPrompt: Prompt) => prevPrompt.id === Number(id)
+        (prevPrompt: PreviousPrompt) => prevPrompt.id === Number(id)
     );
 
     if (!prompt) {
@@ -67,4 +67,4 @@ const PreviousPrompt = ({ previousPrompts }: PreviousPrompts) => {
     );
 };
 
-export default PreviousPrompt;
+export default PromptViewer;

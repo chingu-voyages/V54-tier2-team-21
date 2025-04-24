@@ -50,7 +50,11 @@ export type PreviousPrompt = {
     prompt_response: string;
 };
 
-export type PreviousPrompts = { previousPrompts: PreviousPrompt[] };
+export type PreviousPrompts = PreviousPrompt[];
+
+export type PromptViewerComponentProps = {
+    previousPrompts: PreviousPrompt[];
+};
 
 export type DashBoardComponentProps = {
     token: { token: string; refresh: string };
