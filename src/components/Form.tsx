@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Tooltip, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { FormComponentProps, FormField, Inputs } from '../types';
+import { FormComponentProps, FormField, Inputs, FieldName } from '../types';
 import ClearIcon from '@mui/icons-material/Clear';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -8,7 +8,7 @@ import { capitalise } from '../utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputFormSchema } from '../assets/inputFormSchema';
 import { styles } from '../styles';
-import React from 'react';
+import React, { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -49,6 +49,14 @@ Set the boundaries: "US based only", "In British English", "no hyphenation", "Av
 ];
 
 const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
+    const [buttonClicked, setButtonClicked] = useState({
+        persona: false,
+        context: false,
+        task: false,
+        output: false,
+        constraint: false,
+    });
+
     const {
         register,
         handleSubmit,
@@ -68,16 +76,16 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
     const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
         useSpeechRecognition();
 
-    function handleStartListening() {
+    function handleStartListening(fieldName: FieldName) {
         resetTranscript();
         SpeechRecognition.startListening({ continuous: true });
+        setButtonClicked((prevState) => ({ ...prevState, [fieldName]: true }));
     }
 
-    function handleStopListening(
-        fieldName: 'persona' | 'context' | 'task' | 'output' | 'constraint'
-    ) {
+    function handleStopListening(fieldName: FieldName) {
         SpeechRecognition.stopListening();
         setValue(fieldName, transcript);
+        setButtonClicked((prevState) => ({ ...prevState, [fieldName]: false }));
     }
 
     return (
@@ -198,19 +206,20 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                             aria-label={`Hold down button and dictate what you want to put into the ${field.name} field`}
                                                             sx={{
                                                                 padding: '0',
-                                                                color: styles
-                                                                    .colors
-                                                                    .fontPrimary,
                                                                 cursor: 'pointer',
                                                                 minWidth:
                                                                     '25px',
                                                             }}
-                                                            onTouchStart={
-                                                                handleStartListening
-                                                            }
-                                                            onMouseDown={
-                                                                handleStartListening
-                                                            }
+                                                            onTouchStart={() => {
+                                                                handleStartListening(
+                                                                    field.name
+                                                                );
+                                                            }}
+                                                            onMouseDown={() => {
+                                                                handleStartListening(
+                                                                    field.name
+                                                                );
+                                                            }}
                                                             onTouchEnd={() => {
                                                                 handleStopListening(
                                                                     field.name
@@ -222,7 +231,19 @@ const Form = ({ onFormSubmit, ref }: FormComponentProps) => {
                                                                 );
                                                             }}
                                                         >
-                                                            <MicIcon role="none" />
+                                                            <MicIcon
+                                                                role="none"
+                                                                sx={{
+                                                                    color: !buttonClicked[
+                                                                        field
+                                                                            .name
+                                                                    ]
+                                                                        ? styles
+                                                                              .colors
+                                                                              .fontPrimary
+                                                                        : 'red',
+                                                                }}
+                                                            />
                                                         </Button>
                                                     )}
                                                 </Box>

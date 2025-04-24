@@ -30,6 +30,7 @@ export type LoginComponentProps = {
 export type LayoutComponentProps = {
     isLoggedIn: boolean;
     handleLogout: () => void;
+    token: { token: string; refresh: string };
 };
 
 export type TeamMembers = {
@@ -37,3 +38,31 @@ export type TeamMembers = {
     linkedIn?: string;
     gitHub: string;
 };
+
+export type PreviousPrompt = {
+    public_id: string;
+    user: number;
+    email: string;
+    id: number;
+    prompt_text: string;
+    model: string;
+    created_at: Date;
+    prompt_response: string;
+};
+
+export type PreviousPrompts = { previousPrompts: PreviousPrompt[] };
+
+export type DashBoardComponentProps = {
+    token: { token: string; refresh: string };
+    previousPrompts: PreviousPrompt[];
+    handlePreviousPrompts: (data: PreviousPrompts) => void;
+};
+
+export type FieldName =
+    | 'persona'
+    | 'context'
+    | 'task'
+    | 'output'
+    | 'constraint';
+
+export type Token = { token: { token: string; refresh: string } };

@@ -40,9 +40,10 @@ const HowToUse = () => {
                     margin: 'auto',
                 }}
             >
-                {instructions.map((instruction) => (
+                {instructions.map((instruction, index) => (
                     <Box
                         component="section"
+                        key={index}
                         sx={{
                             backgroundColor: '#37394a',
                             padding: '20px',
