@@ -63,7 +63,6 @@ const Login = ({ page, handleLogin }: LoginComponentProps) => {
 
             navigate(from, { replace: true });
         } catch (error) {
-            console.log(error);
             if (error instanceof Error) {
                 setLoginError(error.message);
             } else {
