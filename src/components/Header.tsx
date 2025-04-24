@@ -6,6 +6,7 @@ import { getMonth, getYear } from '../utils/utils';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import { HeaderComponentProps } from '../types';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = ({ isLoggedIn, handleLogout }: HeaderComponentProps) => {
     const navigate = useNavigate();
@@ -43,14 +44,6 @@ const Header = ({ isLoggedIn, handleLogout }: HeaderComponentProps) => {
                     gap: 1.5,
                 }}
             >
-                <Link
-                    component={RouterLink}
-                    to="dashboard"
-                    sx={styles.secondaryButton}
-                    underline="none"
-                >
-                    DASHBOARD
-                </Link>
                 {isLoggedIn ? (
                     <Button
                         onClick={() => {
@@ -71,6 +64,16 @@ const Header = ({ isLoggedIn, handleLogout }: HeaderComponentProps) => {
                         SIGN UP
                     </Link>
                 )}
+                <Link
+                    component={RouterLink}
+                    to="dashboard"
+                    sx={{
+                        color: styles.colors.fontPrimary,
+                        height: '24px',
+                    }}
+                >
+                    <AccountCircleIcon role="none" />
+                </Link>
                 <Typography sx={{ fontSize: styles.typography.fontSizeSmall }}>
                     {getMonth()} {getYear()}
                 </Typography>

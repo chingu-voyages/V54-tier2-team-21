@@ -202,7 +202,7 @@ const Footer = () => {
                             color: styles.colors.fontPrimary,
                         }}
                     >
-                        <GitHubIcon sx={{ cursor: 'pointer' }} />
+                        <GitHubIcon role="none" />
                     </Typography>
                 </Link>
 

@@ -2,7 +2,7 @@ import { Container, Box, Typography, Button } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react';
 import { styles } from '../styles';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import { Link as RouterLink } from 'react-router-dom';
@@ -16,6 +16,7 @@ const Dashboard = ({
     handlePreviousPrompts,
 }: DashBoardComponentProps) => {
     const [error, setError] = useState('');
+    const [emailSent, setEmailSent] = useState(false);
 
     async function getPreviousPrompts() {
         try {
@@ -58,7 +59,7 @@ const Dashboard = ({
             }
         }
     }
-    console.log(previousPrompts);
+
     async function sendPdf(publicId: string) {
         try {
             const result = await fetch(
@@ -97,9 +98,10 @@ const Dashboard = ({
                 }
             );
 
-            const data = await result.json();
-
-            console.log(data.msg);
+            if (result.status === 200) {
+                setEmailSent(true);
+                setTimeout(() => setEmailSent(false), 2000);
+            }
         } catch (error) {
             if (error instanceof Error) {
                 setError(`Error sending email: ${error.message}`);
@@ -137,16 +139,93 @@ const Dashboard = ({
                 previousPrompts.map((prompt, index) => {
                     return (
                         <React.Fragment key={index}>
+                            <Box
+                                sx={{
+                                    border: '1px solid #595959',
+                                    borderRadius: '8px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    mb: 4,
+                                    pb: 2,
+                                    overflow: 'clip',
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        backgroundColor: '#292C42',
+                                        textAlign: 'left',
+                                        p: 1,
+                                    }}
+                                >
+                                    <Typography sx={{ fontWeight: 700, mb: 1 }}>
+                                        Dashboard
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: '0.85rem',
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        Welcome to your{' '}
+                                        <Box
+                                            component="span"
+                                            sx={{ fontWeight: 700 }}
+                                        >
+                                            5TAR.ai
+                                        </Box>{' '}
+                                        history
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    component="img"
+                                    src="/ultraviolet-star.png"
+                                    alt="Ultraviolet star"
+                                    sx={{
+                                        width: 100,
+                                        height: 100,
+                                        margin: '1em auto',
+                                    }}
+                                />
+                                <Box>
+                                    <Typography
+                                        sx={{
+                                            fontSize: '0.85rem',
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        Download your 5-star prompt & result
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: '0.85rem',
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        as a PDF or send it by e-mail
+                                    </Typography>
+                                </Box>
+                            </Box>
+                            {emailSent && (
+                                <Typography
+                                    sx={{
+                                        fontSize:
+                                            styles.typography.fontSizeNormal,
+                                        m: 1,
+                                        color: '#FD99FF',
+                                    }}
+                                >
+                                    The email has been successfully sent
+                                </Typography>
+                            )}
                             <Grid
                                 size={12}
                                 key={prompt.id}
                                 sx={{
                                     display: 'flex',
-                                    gap: '18px',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    border: '1px solid #3A3737',
-                                    padding: 1,
+                                    flexDirection: 'column',
+                                    gap: 1,
+                                    borderBottom: '1px solid #3A3737',
+                                    padding: '1em 1.25em',
                                     marginBottom: 2,
                                     color: styles.colors.fontSecondary,
                                 }}
@@ -158,15 +237,33 @@ const Dashboard = ({
                                         textOverflow: 'ellipsis',
                                     }}
                                 >
-                                    <Typography
+                                    <Link
+                                        component={RouterLink}
+                                        to={`/prompt/${prompt.id}`}
+                                        key={prompt.id}
                                         sx={{
+                                            padding: '0',
+                                            color: styles.colors.fontPrimary,
                                             fontSize:
                                                 styles.typography
                                                     .fontSizeNormal,
+                                            textDecoration: 'none',
+                                            '&:hover, &:focus': {
+                                                fontWeight: 'bold',
+                                            },
                                         }}
+                                        aria-label={`Click to view prompt id ${prompt.id}`}
                                     >
                                         {prompt.prompt_text}
-                                    </Typography>
+                                    </Link>
+                                </Box>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                    }}
+                                >
                                     <Typography
                                         variant="caption"
                                         sx={{
@@ -177,55 +274,38 @@ const Dashboard = ({
                                             prompt.created_at
                                         ).toLocaleString()}
                                     </Typography>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        gap: 1,
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <Button
-                                        onClick={() =>
-                                            sendPdf(prompt.public_id)
-                                        }
-                                        sx={{
-                                            padding: '0',
-                                            color: styles.colors.fontPrimary,
-                                            cursor: 'pointer',
-                                            minWidth: '25px',
-                                        }}
-                                        aria-label={`Create pdf for prompt id ${prompt.id}`}
-                                    >
-                                        <PictureAsPdfIcon role="none" />
-                                    </Button>
-                                    <Button
-                                        onClick={() =>
-                                            sendEmail(prompt.public_id)
-                                        }
-                                        sx={{
-                                            padding: '0',
-                                            color: styles.colors.fontPrimary,
-                                            cursor: 'pointer',
-                                            minWidth: '25px',
-                                        }}
-                                        aria-label={`Send email for prompt id ${prompt.id}`}
-                                    >
-                                        <EmailIcon role="none" />
-                                    </Button>
-                                    <Link
-                                        component={RouterLink}
-                                        to={`/prompt/${prompt.id}`}
-                                        key={prompt.id}
-                                        sx={{
-                                            padding: '0',
-                                            color: styles.colors.fontPrimary,
-                                            cursor: 'pointer',
-                                            minWidth: '25px',
-                                        }}
-                                    >
-                                        <PageviewIcon role="none" />
-                                    </Link>
+                                    <Box sx={{ display: 'flex', gap: 3 }}>
+                                        <Button
+                                            onClick={() =>
+                                                sendEmail(prompt.public_id)
+                                            }
+                                            sx={{
+                                                padding: '0',
+                                                color: styles.colors
+                                                    .fontPrimary,
+                                                cursor: 'pointer',
+                                                minWidth: '25px',
+                                            }}
+                                            aria-label={`Send email for prompt id ${prompt.id}`}
+                                        >
+                                            <EmailIcon role="none" />
+                                        </Button>
+                                        <Button
+                                            onClick={() =>
+                                                sendPdf(prompt.public_id)
+                                            }
+                                            sx={{
+                                                padding: '0',
+                                                color: styles.colors
+                                                    .fontPrimary,
+                                                cursor: 'pointer',
+                                                minWidth: '25px',
+                                            }}
+                                            aria-label={`Create pdf for prompt id ${prompt.id}`}
+                                        >
+                                            <DownloadIcon role="none" />
+                                        </Button>
+                                    </Box>
                                 </Box>
                             </Grid>
                         </React.Fragment>

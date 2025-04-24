@@ -1,5 +1,4 @@
 import { Box, Typography, Container } from '@mui/material';
-import { styles } from '../styles';
 import { useParams } from 'react-router-dom';
 import { PreviousPrompt as Prompt, PreviousPrompts } from '../types';
 import { convertResult } from '../utils/utils';
@@ -30,22 +29,28 @@ const PreviousPrompt = ({ previousPrompts }: PreviousPrompts) => {
             <Box
                 component="section"
                 sx={{
-                    ...styles.container,
-                    ...styles.promptContainer,
                     textAlign: 'left',
                     p: 1,
+                    mb: 1,
+                    borderBottom: '1px solid #3A3737',
                 }}
                 aria-label="Text area for displaying the 5 prompts combined"
                 tabIndex={0}
             >
-                <Typography>{prompt.prompt_text}</Typography>
+                <Typography sx={{ fontWeight: 200 }}>
+                    {prompt.prompt_text}
+                </Typography>
+                <Typography sx={{ fontWeight: 200, mt: 2 }}>
+                    {new Date(prompt.created_at).toLocaleString()}
+                </Typography>
             </Box>
             <Typography>Result</Typography>
             <Box
                 component="section"
                 sx={{
-                    ...styles.container,
                     p: 1,
+                    mb: 1,
+                    borderBottom: '1px solid #3A3737',
                 }}
                 aria-label="Text area for displaying the result from the Gemini API"
                 tabIndex={0}
@@ -55,6 +60,7 @@ const PreviousPrompt = ({ previousPrompts }: PreviousPrompts) => {
                         __html: convertResult(prompt.prompt_response),
                     }}
                     className="result"
+                    sx={{ fontWeight: 200 }}
                 ></Typography>
             </Box>
         </Container>
